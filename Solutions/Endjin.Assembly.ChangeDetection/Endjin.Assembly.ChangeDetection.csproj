@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A7A8D13C-9909-470B-9C83-EB9795DFB0AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AssemblyDifferences</RootNamespace>
+    <AssemblyName>AssemblyDifferences</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Cecil, Version=0.6.8.8607, Culture=neutral, PublicKeyToken=c04d82a8546dde85, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ReferencedAssemblies\Mono.Cecil\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.2.0.0, Culture=neutral, PublicKeyToken=008145f79b9aec14, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ReferencedAssemblies\Mono.Cecil\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Introspection\AssemblyLoader.cs" />
+    <Compile Include="Infrastructure\BlockingQueue.cs" />
+    <Compile Include="Infrastructure\BlockingQueueAggregator.cs" />
+    <Compile Include="Infrastructure\ClrContext.cs" />
+    <Compile Include="DiffAssemblies.cs" />
+    <Compile Include="Diff\AssemblyDiffCollection.cs" />
+    <Compile Include="Diff\AssemblyDiffer.cs" />
+    <Compile Include="Diff\BreakingChangeSearcher.cs" />
+    <Compile Include="Diff\DiffCollection.cs" />
+    <Compile Include="Diff\DiffOperation.cs" />
+    <Compile Include="Diff\DiffPrinter.cs" />
+    <Compile Include="Diff\DiffResult.cs" />
+    <Compile Include="Diff\TypeDiff.cs" />
+    <Compile Include="Infrastructure\DirectorySearcherAsync.cs" />
+    <Compile Include="Infrastructure\ExceptionHelper.cs" />
+    <Compile Include="Infrastructure\ListExtensions.cs" />
+    <Compile Include="Infrastructure\FileEnumerator.cs" />
+    <Compile Include="Introspection\FilterMode.cs" />
+    <Compile Include="Infrastructure\Level.cs" />
+    <Compile Include="Query\EventComparer.cs" />
+    <Compile Include="Query\FieldComparer.cs" />
+    <Compile Include="Query\MethodComparer.cs" />
+    <Compile Include="Query\TypeNameComparer.cs" />
+    <Compile Include="Query\TypeQueryExtensions.cs" />
+    <Compile Include="Infrastructure\SafeFindHandle.cs" />
+    <Compile Include="Infrastructure\StaticModule.cs" />
+    <Compile Include="Introspection\TypeExtensions.cs" />
+    <Compile Include="Introspection\FieldPrintOptions.cs" />
+    <Compile Include="Infrastructure\FileNameComparer.cs" />
+    <Compile Include="Infrastructure\FileQuery.cs" />
+    <Compile Include="Introspection\FilterFunctions.cs" />
+    <Compile Include="Infrastructure\InternalError.cs" />
+    <Compile Include="Introspection\ISymChkExecutor.cs" />
+    <Compile Include="Infrastructure\LastException.cs" />
+    <Compile Include="Infrastructure\LazyFormat.cs" />
+    <Compile Include="ListDiffer.cs" />
+    <Compile Include="Infrastructure\MessageTypes.cs" />
+    <Compile Include="Introspection\MethodPrintOption.cs" />
+    <Compile Include="Infrastructure\NullTraceListener.cs" />
+    <Compile Include="Introspection\PdbDownLoader.cs" />
+    <Compile Include="Introspection\PdbInformationReader.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Infrastructure\PtrConverter.cs" />
+    <Compile Include="Query\BaseQuery.cs" />
+    <Compile Include="Query\EventQuery.cs" />
+    <Compile Include="Query\FieldQuery.cs" />
+    <Compile Include="Query\GenericTypeMapper.cs" />
+    <Compile Include="Query\Matcher.cs" />
+    <Compile Include="Query\MethodQuery.cs" />
+    <Compile Include="Query\QueryAggregator.cs" />
+    <Compile Include="Query\TypeQuery.cs" />
+    <Compile Include="Query\TypeQueryFactory.cs" />
+    <Compile Include="Query\TypeQueryMode.cs" />
+    <Compile Include="Query\UsageQueries\MatchContext.cs" />
+    <Compile Include="Query\UsageQueries\QueryResult.cs" />
+    <Compile Include="Query\UsageQueries\UsageQueryAggregator.cs" />
+    <Compile Include="Query\UsageQueries\UsageVisitor.cs" />
+    <Compile Include="Query\UsageQueries\WhoAccessesField.cs" />
+    <Compile Include="Query\UsageQueries\WhoDerivesFromType.cs" />
+    <Compile Include="Query\UsageQueries\WhoHasFieldOfType.cs" />
+    <Compile Include="Query\UsageQueries\WhoImplementsInterface.cs" />
+    <Compile Include="Query\UsageQueries\WhoInstantiatesType.cs" />
+    <Compile Include="Query\UsageQueries\WhoReferencesAssembly.cs" />
+    <Compile Include="Query\UsageQueries\WhoUsesEvents.cs" />
+    <Compile Include="Query\UsageQueries\WhoUsesMethod.cs" />
+    <Compile Include="Query\UsageQueries\WhoUsesStringConstant.cs" />
+    <Compile Include="Query\UsageQueries\WhoUsesType.cs" />
+    <Compile Include="Introspection\SymChkExecutor.cs" />
+    <Compile Include="Infrastructure\TraceCfgParser.cs" />
+    <Compile Include="Infrastructure\TraceFilter.cs" />
+    <Compile Include="Infrastructure\TraceFilterMatchAll.cs" />
+    <Compile Include="Infrastructure\TraceFilterMatchNone.cs" />
+    <Compile Include="Infrastructure\Tracer.cs" />
+    <Compile Include="Infrastructure\TracerConfig.cs" />
+    <Compile Include="Infrastructure\TypeHashes.cs" />
+    <Compile Include="Introspection\TypeMapper.cs" />
+    <Compile Include="Infrastructure\WIN32_FIND_DATA.cs" />
+    <Compile Include="Infrastructure\WorkItemDispatcher.cs" />
+    <Compile Include="Infrastructure\WorkItemDispatcherData.cs" />
+    <Compile Include="Infrastructure\WorkItemOptions.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
