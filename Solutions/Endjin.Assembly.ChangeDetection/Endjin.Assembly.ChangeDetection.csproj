@@ -128,6 +128,8 @@
     <Compile Include="Infrastructure\WorkItemDispatcher.cs" />
     <Compile Include="Infrastructure\WorkItemDispatcherData.cs" />
     <Compile Include="Infrastructure\WorkItemOptions.cs" />
+    <Compile Include="Rules\BreakingChangeRule.cs" />
+    <Compile Include="Rules\IRule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -19,20 +19,20 @@ namespace Endjin.Assembly.ChangeDetection.Specs.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Difference Detection")]
-    public partial class DifferenceDetectionFeature
+    [NUnit.Framework.DescriptionAttribute("Change Rules")]
+    public partial class ChangeRulesFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "DifferenceDetection.feature"
+#line 1 "ChangeRules.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Difference Detection", "In order to establish what the semantic version of the build should be\nAs the bui" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Change Rules", "In order to establish what the semantic version of the build should be\nAs the bui" +
                     "ld process\nI want to be if the current assembly has breaking changes from the pr" +
                     "evious version", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
@@ -67,10 +67,10 @@ namespace Endjin.Assembly.ChangeDetection.Specs.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("New Assembly has a non breaking additive change")]
-        public virtual void NewAssemblyHasANonBreakingAdditiveChange()
+        [NUnit.Framework.DescriptionAttribute("New Assembly has a non breaking additive change does not violate any rules")]
+        public virtual void NewAssemblyHasANonBreakingAdditiveChangeDoesNotViolateAnyRules()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("New Assembly has a non breaking additive change", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("New Assembly has a non breaking additive change does not violate any rules", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -80,38 +80,32 @@ testRunner.Given("the previous assembly is called \"C:\\_Projects\\endjin\\IP\\E
 testRunner.Given("the new assembly is called \"C:\\_Projects\\endjin\\IP\\Endjin.Assembly.ChangeDetectio" +
                     "n\\Solutions\\NonBreakingAdditiveChange\\bin\\Debug\\Original.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 9
-testRunner.When("I compare the two assemblies", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.When("I compare the two assemblies and validate the rules", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
-testRunner.Then("I should be told there is 1 change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 11
-testRunner.And("I should be told that the change is 1 method has been added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 12
-testRunner.And("I should be told that the change is 0 method has been removed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("I should be told that the rule has not been violated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("New Assembly has a breaking change due to a public api being modified")]
-        public virtual void NewAssemblyHasABreakingChangeDueToAPublicApiBeingModified()
+        [NUnit.Framework.DescriptionAttribute("New Assembly has a breaking change due to a public api being modified does violat" +
+            "e rules")]
+        public virtual void NewAssemblyHasABreakingChangeDueToAPublicApiBeingModifiedDoesViolateRules()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("New Assembly has a breaking change due to a public api being modified", ((string[])(null)));
-#line 14
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("New Assembly has a breaking change due to a public api being modified does violat" +
+                    "e rules", ((string[])(null)));
+#line 12
 this.ScenarioSetup(scenarioInfo);
-#line 15
+#line 13
 testRunner.Given("the previous assembly is called \"C:\\_Projects\\endjin\\IP\\Endjin.Assembly.ChangeDet" +
                     "ection\\Solutions\\Original\\bin\\Debug\\Original.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 16
+#line 14
 testRunner.Given("the new assembly is called \"C:\\_Projects\\endjin\\IP\\Endjin.Assembly.ChangeDetectio" +
                     "n\\Solutions\\BreakingChange\\bin\\Debug\\Original.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 17
-testRunner.When("I compare the two assemblies", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 18
-testRunner.Then("I should be told there is 1 change", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 19
-testRunner.And("I should be told that the change is 1 method has been added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 20
-testRunner.And("I should be told that the change is 1 method has been removed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 15
+testRunner.When("I compare the two assemblies and validate the rules", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 16
+testRunner.Then("I should be told that the rule has been violated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
