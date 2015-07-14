@@ -24,9 +24,8 @@
 
                 if (result.BreakingChangesDetected)
                 {
-                    
+                    Console.WriteLine("##teamcity[buildNumber '" + result.VersionNumber + "']");
                 }
-
             }
             catch (Exception exception)
             {
