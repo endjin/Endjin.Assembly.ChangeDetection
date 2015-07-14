@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreakingChange", "BreakingC
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "@Samples", "@Samples", "{77DE1AEF-5952-436F-9616-B133EB00B5CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endjin.SemanticVersioning.TeamCity", "Endjin.SemanticVersioning.TeamCity\Endjin.SemanticVersioning.TeamCity.csproj", "{3206A0CB-2F90-4D0A-AC79-3F6E39990F8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{282B8835-B9D0-4F6E-B33D-73E9D8BD0D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{282B8835-B9D0-4F6E-B33D-73E9D8BD0D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{282B8835-B9D0-4F6E-B33D-73E9D8BD0D0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3206A0CB-2F90-4D0A-AC79-3F6E39990F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3206A0CB-2F90-4D0A-AC79-3F6E39990F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3206A0CB-2F90-4D0A-AC79-3F6E39990F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3206A0CB-2F90-4D0A-AC79-3F6E39990F8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
