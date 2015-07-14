@@ -41,6 +41,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ReferencedAssemblies\Mono.Cecil\Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
+    <Reference Include="Semver, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\semver.1.1.2\lib\net451\Semver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -130,7 +134,13 @@
     <Compile Include="Infrastructure\WorkItemOptions.cs" />
     <Compile Include="Rules\BreakingChangeRule.cs" />
     <Compile Include="Rules\IRule.cs" />
+    <Compile Include="SemVer\AnalysisResult.cs" />
+    <Compile Include="SemVer\SemanticVersionAnalyzer.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

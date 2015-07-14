@@ -56,6 +56,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\SemanticVersioning.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SemanticVersioning.feature</DependentUpon>
+    </Compile>
     <Compile Include="Steps\ChangeRulesSteps.cs" />
     <Compile Include="Features\DifferenceDetection.feature.cs">
       <AutoGen>True</AutoGen>
@@ -69,6 +74,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\DifferenceDetectionSteps.cs" />
+    <Compile Include="Steps\SemanticVersioningSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -79,6 +85,10 @@
     <None Include="Features\ChangeRules.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ChangeRules.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\SemanticVersioning.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SemanticVersioning.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

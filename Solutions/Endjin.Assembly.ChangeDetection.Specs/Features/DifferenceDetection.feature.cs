@@ -33,8 +33,8 @@ namespace Endjin.Assembly.ChangeDetection.Specs.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Difference Detection", "In order to establish what the semantic version of the build should be\nAs the bui" +
-                    "ld process\nI want to be if the current assembly has breaking changes from the pr" +
-                    "evious version", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "ld process\nI want to decide if the current assembly has breaking changes from th" +
+                    "e previous version", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         

@@ -1,7 +1,7 @@
 ﻿Feature: Difference Detection
 	In order to establish what the semantic version of the build should be
 	As the build process
-	I want to be if the current assembly has breaking changes from the previous version
+	I want to decide if the current assembly has breaking changes from the previous version
 
 Scenario: New Assembly has a non breaking additive change
 Given the previous assembly is called "C:\_Projects\endjin\IP\Endjin.Assembly.ChangeDetection\Solutions\Original\bin\Debug\Original.dll"
