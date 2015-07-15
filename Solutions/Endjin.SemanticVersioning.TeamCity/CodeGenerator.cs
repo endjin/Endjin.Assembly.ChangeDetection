@@ -9,7 +9,7 @@
 
     #endregion
 
-    public class CodeGen
+    public class CodeGenerator
     {
         public void GenerateVersionDetailsAssembly(string currentAssembly, string configuration, string assemblyVersion, string productVersion, string semanticVersion)
         {
@@ -20,23 +20,21 @@
 
             foreach (var attribute in attributes)
             {
+                Console.WriteLine(attribute.GetType().Name);
                 //codeCompileUnit.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference(attribute.GetType()), new CodeAttributeArgument(new CodePrimitiveExpression())));
             }
-
-            var x = new CodeAttributeDeclaration(
-                new CodeTypeReference(typeof(AssemblyConfigurationAttribute)), new CodeAttributeArgument(new CodePrimitiveExpression(configuration)));
 
             codeCompileUnit.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference(typeof(AssemblyConfigurationAttribute)), new CodeAttributeArgument(new CodePrimitiveExpression(configuration))));
             codeCompileUnit.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference(typeof(AssemblyFileVersionAttribute)), new CodeAttributeArgument(new CodePrimitiveExpression(productVersion))));
             codeCompileUnit.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference(typeof(AssemblyInformationalVersionAttribute)), new CodeAttributeArgument(new CodePrimitiveExpression(productVersion))));
-            codeCompileUnit.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference(typeof(AssemblyVersionAttribute)), new CodeAttributeArgument(new CodePrimitiveExpression(assemblyVersion))));
+            //codeCompileUnit.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference(typeof(AssemblyVersionAttribute)), new CodeAttributeArgument(new CodePrimitiveExpression(assemblyVersion))));
 
             using (var provider = CodeDomProvider.CreateProvider("CSharp"))
             {
                 var parameters = new CompilerParameters
                 {
                     GenerateExecutable = false,
-                    OutputAssembly = "AutoGen.dll"
+                    OutputAssembly = Guid.NewGuid() + ".dll"
                 };
 
                 var compilerResults = provider.CompileAssemblyFromDom(parameters, codeCompileUnit);

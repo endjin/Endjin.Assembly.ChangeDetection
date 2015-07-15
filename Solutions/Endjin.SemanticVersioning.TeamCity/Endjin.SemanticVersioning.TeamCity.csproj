@@ -44,9 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyAttributeExtensions.cs" />
-    <Compile Include="CodeGen.cs" />
+    <Compile Include="CodeGenerator.cs" />
     <Compile Include="CommandLineProcessor.cs" />
     <Compile Include="CommandOptions.cs" />
+    <Compile Include="AttributeConverters\CustomAttributeConverter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
