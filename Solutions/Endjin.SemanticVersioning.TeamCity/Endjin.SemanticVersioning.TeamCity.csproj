@@ -44,10 +44,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyAttributeExtensions.cs" />
+    <Compile Include="AttributeConverters\AssemblyCompanyAttributeConverter.cs" />
+    <Compile Include="AttributeConverters\AssemblyCopyrightAttributeConverter.cs" />
+    <Compile Include="AttributeConverters\AssemblyDescriptionAttributeConverter.cs" />
+    <Compile Include="AttributeConverters\AssemblyProductAttributeConverter.cs" />
+    <Compile Include="AttributeConverters\AssemblyTitleAttributeConverter.cs" />
+    <Compile Include="AttributeConverters\AssemblyTrademarkAttributeConverter.cs" />
+    <Compile Include="AttributeConverters\CompilationRelaxationsAttributeConverter.cs" />
+    <Compile Include="AttributeConverters\ComVisibleAttributeConverter.cs" />
+    <Compile Include="AttributeConverters\DebuggableAttributeConverter.cs" />
+    <Compile Include="AttributeConverters\GuidAttributeConverter.cs" />
+    <Compile Include="AttributeConverters\RuntimeCompatibilityAttributeConverter.cs" />
+    <Compile Include="AttributeConverters\TargetFrameworkAttributeConverter.cs" />
     <Compile Include="CodeGenerator.cs" />
     <Compile Include="CommandLineProcessor.cs" />
     <Compile Include="CommandOptions.cs" />
-    <Compile Include="AttributeConverters\CustomAttributeConverter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
