@@ -4,6 +4,6 @@
 
     public interface IRule
     {
-        bool Validate(AssemblyDiffCollection assemblyDiffCollection);
+        bool Detect(AssemblyDiffCollection assemblyDiffCollection);
     }
 }

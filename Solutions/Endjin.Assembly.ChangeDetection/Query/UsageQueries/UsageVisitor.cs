@@ -7,6 +7,7 @@ namespace AssemblyDifferences.Query.usagequeries
 
     using Mono.Cecil;
     using Mono.Cecil.Cil;
+    using Mono.Collections.Generic;
 
     public class UsageVisitor
     {
@@ -37,7 +38,7 @@ namespace AssemblyDifferences.Query.usagequeries
         {
         }
 
-        public virtual void VisitLocals(VariableDefinitionCollection locals, MethodDefinition declaringMethod)
+        public virtual void VisitLocals(Collection<VariableDefinition> locals, MethodDefinition declaringMethod)
         {
         }
 

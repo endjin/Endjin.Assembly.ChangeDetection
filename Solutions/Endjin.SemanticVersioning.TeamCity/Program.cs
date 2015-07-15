@@ -24,7 +24,7 @@
 
                 if (result.BreakingChangesDetected)
                 {
-                    new CodeGen().GenerateVersionDetailsAssembly(options.CurrentAssembly, "Release", result.VersionNumber, result.VersionNumber, result.VersionNumber, @"c:\temp");
+                    new CodeGen().GenerateVersionDetailsAssembly(options.CurrentAssembly, "Release", result.VersionNumber, result.VersionNumber, result.VersionNumber);
 
                     Console.WriteLine("##teamcity[buildNumber '" + result.VersionNumber + "']");
                 }

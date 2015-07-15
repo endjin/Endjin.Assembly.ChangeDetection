@@ -8,6 +8,7 @@ namespace AssemblyDifferences.Query.usagequeries
 
     using Mono.Cecil;
     using Mono.Cecil.Cil;
+    using Mono.Collections.Generic;
 
     /// <summary>
     ///     Search for users of type
@@ -120,10 +121,10 @@ namespace AssemblyDifferences.Query.usagequeries
         {
             TypeDefinition matchingType = null;
             // Check return type (recursively) to find all generic parameters
-            if (this.IsMatching(this.myArgSearchTypeNames, this.mySearchArgTypes, method.ReturnType.ReturnType, out matchingType))
+            if (IsMatching(myArgSearchTypeNames, mySearchArgTypes, method.ReturnType, out matchingType))
             {
-                var context = new MatchContext(UsedAsMethodReturnType, matchingType.Print());
-                this.Aggregator.AddMatch(method, context);
+                MatchContext context = new MatchContext(UsedAsMethodReturnType, matchingType.Print());
+                Aggregator.AddMatch(method, context);
                 return;
             }
 
@@ -270,7 +271,7 @@ namespace AssemblyDifferences.Query.usagequeries
             }
         }
 
-        public override void VisitLocals(VariableDefinitionCollection locals, MethodDefinition declaringMethod)
+        public override void VisitLocals(Collection<VariableDefinition> locals, MethodDefinition declaringMethod)
         {
             base.VisitLocals(locals, declaringMethod);
 

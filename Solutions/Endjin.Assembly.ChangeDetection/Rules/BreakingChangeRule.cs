@@ -10,11 +10,11 @@
 
     public class BreakingChangeRule : IRule
     {
-        public bool Validate(AssemblyDiffCollection assemblyDiffCollection)
+        public bool Detect(AssemblyDiffCollection assemblyDiffCollection)
         {
             if (assemblyDiffCollection.AddedRemovedTypes.RemovedCount > 0)
             {
-                return false;
+                return true;
             }
 
             if (assemblyDiffCollection.ChangedTypes.Count > 0)
@@ -23,35 +23,35 @@
                 {
                     if (typeChange.HasChangedBaseType)
                     {
-                        return false;
+                        return true;
                     }
 
                     if (typeChange.Interfaces.Count > 0)
                     {
                         if (typeChange.Interfaces.Removed.Any())
                         {
-                            return false;
+                            return true;
                         }
                     }
 
                     if (typeChange.Events.Removed.Any())
                     {
-                        return false;
+                        return true;
                     }
 
                     if (typeChange.Fields.Removed.Any())
                     {
-                        return false;
+                        return true;
                     }
 
                     if (typeChange.Methods.Removed.Any())
                     {
-                        return false;
+                        return true;
                     }
                 }
             }
 
-            return true;
+            return false;
         }
     }
 }

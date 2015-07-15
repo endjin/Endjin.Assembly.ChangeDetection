@@ -11,10 +11,9 @@
 
     public class CodeGen
     {
-        public void GenerateVersionDetailsAssembly(string currentAssembly, string configuration, string assemblyVersion, string productVersion, string semanticVersion, string outputPath)
+        public void GenerateVersionDetailsAssembly(string currentAssembly, string configuration, string assemblyVersion, string productVersion, string semanticVersion)
         {
             var assembly = Assembly.LoadFile(currentAssembly);
-
             var attributes = assembly.GetAssemblyAttributes();
 
             var codeCompileUnit = new CodeCompileUnit();
@@ -22,9 +21,10 @@
             foreach (var attribute in attributes)
             {
                 //codeCompileUnit.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference(attribute.GetType()), new CodeAttributeArgument(new CodePrimitiveExpression())));
-
-                //codeCompileUnit.AssemblyCustomAttributes.
             }
+
+            var x = new CodeAttributeDeclaration(
+                new CodeTypeReference(typeof(AssemblyConfigurationAttribute)), new CodeAttributeArgument(new CodePrimitiveExpression(configuration)));
 
             codeCompileUnit.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference(typeof(AssemblyConfigurationAttribute)), new CodeAttributeArgument(new CodePrimitiveExpression(configuration))));
             codeCompileUnit.AssemblyCustomAttributes.Add(new CodeAttributeDeclaration(new CodeTypeReference(typeof(AssemblyFileVersionAttribute)), new CodeAttributeArgument(new CodePrimitiveExpression(productVersion))));

@@ -31,9 +31,9 @@
 
             var rule = new BreakingChangeRule();
 
-            var validationResult = rule.Validate(differences);
+            var breakingChange = rule.Detect(differences);
 
-            if (!validationResult)
+            if (breakingChange)
             {
                 var semVer = SemVersion.Parse(proposedVersionNumber);
 
@@ -44,7 +44,7 @@
 
             return new AnalysisResult
             {
-                BreakingChangesDetected = validationResult,
+                BreakingChangesDetected = breakingChange,
                 VersionNumber = proposedVersionNumber
             };
         }

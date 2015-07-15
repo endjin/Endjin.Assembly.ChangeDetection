@@ -28,7 +28,7 @@
             var differences = differ.Execute(new List<FileQuery> { previous }, new List<FileQuery> { newAssembly });
             var rule = new BreakingChangeRule();
 
-            var result = rule.Validate(differences);
+            var result = rule.Detect(differences);
 
             ScenarioContext.Current.Set(result, "Results");
         }

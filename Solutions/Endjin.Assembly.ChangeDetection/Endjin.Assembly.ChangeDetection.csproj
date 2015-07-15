@@ -33,13 +33,21 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Mono.Cecil, Version=0.6.8.8607, Culture=neutral, PublicKeyToken=c04d82a8546dde85, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ReferencedAssemblies\Mono.Cecil\Mono.Cecil.dll</HintPath>
+    <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Mono.Cecil.Pdb, Version=0.2.0.0, Culture=neutral, PublicKeyToken=008145f79b9aec14, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ReferencedAssemblies\Mono.Cecil\Mono.Cecil.Pdb.dll</HintPath>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.Mdb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.Pdb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\Mono.Cecil.0.9.6.1\lib\net45\Mono.Cecil.Rocks.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Semver, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\Packages\semver.1.1.2\lib\net451\Semver.dll</HintPath>
@@ -71,6 +79,7 @@
     <Compile Include="Infrastructure\FileEnumerator.cs" />
     <Compile Include="Introspection\FilterMode.cs" />
     <Compile Include="Infrastructure\Level.cs" />
+    <Compile Include="Introspection\TypeExtensions.cs" />
     <Compile Include="Query\EventComparer.cs" />
     <Compile Include="Query\FieldComparer.cs" />
     <Compile Include="Query\MethodComparer.cs" />
@@ -78,7 +87,6 @@
     <Compile Include="Query\TypeQueryExtensions.cs" />
     <Compile Include="Infrastructure\SafeFindHandle.cs" />
     <Compile Include="Infrastructure\StaticModule.cs" />
-    <Compile Include="Introspection\TypeExtensions.cs" />
     <Compile Include="Introspection\FieldPrintOptions.cs" />
     <Compile Include="Infrastructure\FileNameComparer.cs" />
     <Compile Include="Infrastructure\FileQuery.cs" />

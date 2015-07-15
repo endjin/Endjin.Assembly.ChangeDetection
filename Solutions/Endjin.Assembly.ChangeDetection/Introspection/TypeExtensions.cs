@@ -8,17 +8,16 @@ namespace AssemblyDifferences.Introspection
     using AssemblyDifferences.Diff;
 
     using Mono.Cecil;
+    using Mono.Collections.Generic;
 
     public static class TypeExtensions
     {
-        private static readonly char[] myGenericParamSep = { '`' };
-
         public static TypeDiff GetTypeByName(this HashSet<TypeDiff> set, string typeName)
         {
             TypeDiff lret = null;
-            foreach (var type in set)
+            foreach (TypeDiff type in set)
             {
-                if (string.CompareOrdinal(type.ToString(), typeName) == 0)
+                if (String.CompareOrdinal(type.ToString(), typeName) == 0)
                 {
                     lret = type;
                     break;
@@ -39,11 +38,12 @@ namespace AssemblyDifferences.Introspection
 
             foreach (var field in list)
             {
-                if (string.CompareOrdinal(field.Name, fieldName) == 0)
+                if (String.CompareOrdinal(field.Name, fieldName) == 0)
                 {
-                    if (!string.IsNullOrEmpty(fieldType))
+                    if (!String.IsNullOrEmpty(fieldType))
                     {
-                        if (field.FieldType != null && field.FieldType.FullName == fieldType)
+                        if (field.FieldType != null &&
+                            field.FieldType.FullName == fieldType)
                         {
                             lret = field;
                             break;
@@ -59,6 +59,7 @@ namespace AssemblyDifferences.Introspection
 
             return lret;
         }
+
 
         public static EventDefinition GetEventByName(this List<EventDefinition> list, string evName)
         {
@@ -89,55 +90,42 @@ namespace AssemblyDifferences.Introspection
             return lret;
         }
 
-        private static void AddVisibility(StringBuilder sb, bool isPublic, bool isPrivate, bool isFamily, bool isAssembly, bool isProtectedInternal)
+
+        static void AddVisibility(StringBuilder sb, bool isPublic, bool isPrivate, bool isFamily, bool isAssembly, bool isProtectedInternal)
         {
             if (isPublic)
-            {
                 sb.Append("public ");
-            }
             if (isPrivate)
-            {
                 sb.Append("private ");
-            }
             if (isFamily)
-            {
                 sb.Append("protected ");
-            }
             if (isAssembly)
-            {
                 sb.Append("internal ");
-            }
             if (isProtectedInternal)
-            {
                 sb.Append("protected internal ");
-            }
         }
 
         public static string Print(this EventDefinition ev)
         {
-            var sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-            var evMethod = ev.AddMethod;
+            MethodDefinition evMethod = ev.AddMethod;
 
             AddVisibility(sb, evMethod.IsPublic, evMethod.IsPrivate, evMethod.IsFamily, evMethod.IsAssembly, evMethod.IsFamilyOrAssembly);
 
             if (evMethod.IsVirtual)
-            {
                 sb.AppendFormat("{0} ", "virtual");
-            }
             if (evMethod.IsStatic)
-            {
                 sb.AppendFormat("{0} ", "static");
-            }
 
             sb.Append("event ");
 
             string typeName;
             if (ev.EventType is GenericInstanceType)
             {
-                var genFieldType = (GenericInstanceType)ev.EventType;
-                var typeSb = new StringBuilder();
-                sb.Append(genFieldType.Name.Split('`')[0]);
+                GenericInstanceType genFieldType = (GenericInstanceType)ev.EventType;
+                StringBuilder typeSb = new StringBuilder();
+                sb.Append(genFieldType.Name.Split(new char[] { '`' })[0]);
                 PrintGenericArgumentCollection(typeSb, genFieldType.GenericArguments);
                 typeName = typeSb.ToString();
             }
@@ -156,7 +144,7 @@ namespace AssemblyDifferences.Introspection
 
         public static string Print(this FieldDefinition field, FieldPrintOptions options)
         {
-            var sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
             if ((options & FieldPrintOptions.Visibility) == FieldPrintOptions.Visibility)
             {
@@ -181,10 +169,10 @@ namespace AssemblyDifferences.Introspection
                 }
             }
 
-            var typeName = "";
+            string typeName = "";
             if ((options & FieldPrintOptions.SimpleType) == FieldPrintOptions.SimpleType)
             {
-                var genType = field.FieldType as GenericInstanceType;
+                GenericInstanceType genType = field.FieldType as GenericInstanceType;
                 if (genType != null)
                 {
                     typeName = genType.Print();
@@ -197,9 +185,11 @@ namespace AssemblyDifferences.Introspection
             }
             sb.Append(typeName);
 
+
             sb.AppendFormat(" {0}", field.Name);
 
-            if (((options & FieldPrintOptions.Value) == FieldPrintOptions.Value) && field.HasConstant)
+            if (((options & FieldPrintOptions.Value) == FieldPrintOptions.Value) &&
+                field.HasConstant)
             {
                 sb.AppendFormat(" - Value: {0}", field.Constant);
             }
@@ -207,14 +197,17 @@ namespace AssemblyDifferences.Introspection
             return sb.ToString();
         }
 
-        private static string RemoveGenericParameterCountFromName(string name)
+        static char[] myGenericParamSep = new char[] { '`' };
+
+        static string RemoveGenericParameterCountFromName(string name)
         {
             return name.Split(myGenericParamSep)[0];
         }
 
+
         public static string Print(this GenericInstanceType type)
         {
-            var sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             sb.Append(RemoveGenericParameterCountFromName(type.Name));
             PrintGenericArgumentCollection(sb, type.GenericArguments);
             return sb.ToString();
@@ -222,7 +215,7 @@ namespace AssemblyDifferences.Introspection
 
         public static string Print(this TypeDefinition type)
         {
-            var sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
             if (type.IsPublic)
             {
                 sb.Append("public ");
@@ -258,29 +251,27 @@ namespace AssemblyDifferences.Introspection
                 sb.Append(".");
             }
 
-            sb.Append(type.Name.Split('`')[0]);
+            sb.Append(type.Name.Split(new char[] { '`' })[0]);
             PrintGenericParameterCollection(sb, type.GenericParameters);
             return sb.ToString();
         }
 
         /// <summary>
-        ///     A type reference to a generic contains the concrete types to fully declare it.
-        ///     Like List&lt;string&gt; where string is an argument to the generic type.
+        /// A type reference to a generic contains the concrete types to fully declare it.
+        /// Like List&lt;string&gt; where string is an argument to the generic type.
         /// </summary>
         /// <param name="sb"></param>
         /// <param name="coll"></param>
-        private static void PrintGenericArgumentCollection(StringBuilder sb, GenericArgumentCollection coll)
+        static void PrintGenericArgumentCollection(StringBuilder sb, Collection<TypeReference> coll)
         {
             if (coll == null || coll.Count == 0)
-            {
                 return;
-            }
 
             sb.Append("<");
-            for (var i = 0; i < coll.Count; i++)
+            for (int i = 0; i < coll.Count; i++)
             {
-                var param = coll[i];
-                var generic = param as GenericInstanceType;
+                TypeReference param = coll[i];
+                GenericInstanceType generic = param as GenericInstanceType;
                 if (generic != null)
                 {
                     sb.Append(RemoveGenericParameterCountFromName(generic.Name));
@@ -298,14 +289,15 @@ namespace AssemblyDifferences.Introspection
                 }
             }
             sb.Append(">");
+
         }
 
         /// <summary>
-        ///     A type definition can contain generic parameters which are printed out here
+        /// A type definition can contain generic parameters which are printed out here
         /// </summary>
         /// <param name="sb"></param>
         /// <param name="coll"></param>
-        private static void PrintGenericParameterCollection(StringBuilder sb, GenericParameterCollection coll)
+        static void PrintGenericParameterCollection(StringBuilder sb, Collection<GenericParameter> coll)
         {
             if (coll == null || coll.Count == 0)
             {
@@ -313,9 +305,9 @@ namespace AssemblyDifferences.Introspection
             }
 
             sb.Append("<");
-            for (var i = 0; i < coll.Count; i++)
+            for (int i = 0; i < coll.Count; i++)
             {
-                var param = coll[i];
+                GenericParameter param = coll[i];
                 sb.Append(TypeMapper.FullToShort(param.Name));
                 // Print recursive definition
                 PrintGenericParameterCollection(sb, param.GenericParameters);
@@ -327,34 +319,34 @@ namespace AssemblyDifferences.Introspection
             sb.Append(">");
         }
 
+
         public static string Print(this MethodReference method, MethodPrintOption options)
         {
-            var sb = new StringBuilder();
-            sb.AppendFormat("{0} {1} {2}", method.DeclaringType.FullName, method.ReturnType.ReturnType.Name, method.Name);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendFormat("{0} {1} {2}",
+                method.DeclaringType.FullName,
+                method.ReturnType.Name,
+                method.Name);
             PrintParameters(method.Parameters, sb, options);
             return sb.ToString();
         }
 
-        private static void PrintParameters(ParameterDefinitionCollection parameters, StringBuilder sb, MethodPrintOption options)
+        static void PrintParameters(Collection<ParameterDefinition> parameters, StringBuilder sb, MethodPrintOption options)
         {
-            var bPrintNames = ((options & MethodPrintOption.ParamNames) == MethodPrintOption.ParamNames);
+            bool bPrintNames = ((options & MethodPrintOption.ParamNames) == MethodPrintOption.ParamNames);
             sb.Append("(");
-            for (var i = 0; i < parameters.Count; i++)
+            for (int i = 0; i < parameters.Count; i++)
             {
-                var parameter = parameters[i];
+                ParameterDefinition parameter = parameters[i];
 
                 if (parameter.IsOut)
-                {
                     sb.Append("out ");
-                }
 
                 string paramType = null;
 
-                var generic = parameter.ParameterType as GenericInstanceType;
+                GenericInstanceType generic = parameter.ParameterType as GenericInstanceType;
                 if (generic != null)
-                {
                     paramType = generic.Print();
-                }
 
                 if (paramType == null)
                 {
@@ -365,7 +357,7 @@ namespace AssemblyDifferences.Introspection
                 // inside it for the time beeing.
                 if (parameter.IsOut)
                 {
-                    paramType = paramType.TrimEnd('&');
+                    paramType = paramType.TrimEnd(new char[] { '&' });
                 }
 
                 sb.Append(paramType);
@@ -384,8 +376,8 @@ namespace AssemblyDifferences.Introspection
 
         public static string Print(this MethodDefinition method, MethodPrintOption options)
         {
-            var sb = new StringBuilder();
-            var bPrintAlias = ((MethodPrintOption.ShortNames & MethodPrintOption.ShortNames) == MethodPrintOption.ShortNames);
+            StringBuilder sb = new StringBuilder();
+            bool bPrintAlias = ((MethodPrintOption.ShortNames & MethodPrintOption.ShortNames) == MethodPrintOption.ShortNames);
 
             if ((MethodPrintOption.Visiblity & options) == MethodPrintOption.Visiblity)
             {
@@ -395,30 +387,23 @@ namespace AssemblyDifferences.Introspection
             if ((MethodPrintOption.Modifier & options) == MethodPrintOption.Modifier)
             {
                 if (method.IsVirtual && method.HasBody)
-                {
                     sb.AppendFormat("{0} ", "virtual");
-                }
                 if (method.IsStatic)
-                {
                     sb.AppendFormat("{0} ", "static");
-                }
             }
+
 
             if ((MethodPrintOption.ReturnType & options) == MethodPrintOption.ReturnType)
             {
                 string retType = null;
                 if (bPrintAlias)
                 {
-                    var generic = method.ReturnType.ReturnType as GenericInstanceType;
+                    GenericInstanceType generic = method.ReturnType as GenericInstanceType;
                     if (generic != null)
-                    {
                         retType = generic.Print();
-                    }
                 }
                 if (retType == null)
-                {
-                    retType = TypeMapper.FullToShort(method.ReturnType.ReturnType.FullName);
-                }
+                    retType = TypeMapper.FullToShort(method.ReturnType.FullName);
 
                 sb.AppendFormat("{0} ", retType);
             }
@@ -434,61 +419,72 @@ namespace AssemblyDifferences.Introspection
         }
 
         /// <summary>
-        ///     Compares two TypeReferences by its Full Name and declaring assembly
+        /// Compares two TypeReferences by its Full Name and declaring assembly
         /// </summary>
         /// <param name="x">The x.</param>
         /// <param name="y">The y.</param>
         /// <returns>
-        ///     <c>true</c> if the specified x is equal; otherwise, <c>false</c>.
+        /// 	<c>true</c> if the specified x is equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool IsEqual(this TypeDefinition x, TypeDefinition y)
         {
             if (x == null && y == null)
-            {
                 return true;
-            }
 
-            if ((x == null && y != null) || (x != null && y == null))
+            if ((x == null && y != null) ||
+                (x != null && y == null))
             {
                 return false;
             }
 
-            return x.FullName == y.FullName && x.Scope.IsEqual(y.Scope);
+            return x.FullName == y.FullName &&
+                   x.Scope.IsEqual(y.Scope);
         }
 
-        private static bool Contains(this InterfaceCollection interfaces, TypeReference itfTypeRef)
+        static bool Contains(this Collection<TypeReference> interfaces, TypeReference itfTypeRef)
         {
             foreach (TypeReference typeRef in interfaces)
             {
                 if (typeRef.IsEqual(itfTypeRef))
-                {
                     return true;
-                }
             }
 
             return false;
         }
 
         /// <summary>
-        ///     Check if two methods are equal with respect to name, return type, visibility and method modifiers.
+        /// Check if two methods are equal with respect to name, return type, visibility and method modifiers.
         /// </summary>
         /// <param name="m1">The m1.</param>
         /// <param name="m2">The m2.</param>
         /// <returns></returns>
         public static bool IsEqual(this MethodDefinition m1, MethodDefinition m2)
         {
-            var lret = false;
+            bool lret = false;
+
 
             // check if function name, modifiers and paramters are still equal
-            if (m1 != null && m1.Name == m2.Name && m1.ReturnType.ReturnType.FullName == m2.ReturnType.ReturnType.FullName && m1.Parameters.Count == m2.Parameters.Count && m1.IsPrivate == m2.IsPrivate && m1.IsPublic == m2.IsPublic && m1.IsFamily == m2.IsFamily && m1.IsAssembly == m2.IsAssembly && m1.IsFamilyOrAssembly == m2.IsFamilyOrAssembly && m1.IsVirtual == m2.IsVirtual && m1.IsStatic == m2.IsStatic && m1.GenericParameters.Count == m2.GenericParameters.Count)
+            if (m1 != null &&
+                  m1.Name == m2.Name &&
+                  m1.ReturnType.FullName == m2.ReturnType.FullName &&
+                  m1.Parameters.Count == m2.Parameters.Count &&
+                  m1.IsPrivate == m2.IsPrivate &&
+                  m1.IsPublic == m2.IsPublic &&
+                  m1.IsFamily == m2.IsFamily &&
+                  m1.IsAssembly == m2.IsAssembly &&
+                  m1.IsFamilyOrAssembly == m2.IsFamilyOrAssembly &&
+                  m1.IsVirtual == m2.IsVirtual &&
+                  m1.IsStatic == m2.IsStatic &&
+                  m1.GenericParameters.Count == m2.GenericParameters.Count
+             )
             {
-                var bParameterEqual = true;
+                bool bParameterEqual = true;
 
                 // Check function parameter types if there has been any change
-                for (var i = 0; i < m1.Parameters.Count; i++)
+                for (int i = 0; i < m1.Parameters.Count; i++)
                 {
-                    var pa = m1.Parameters[i];
-                    var pb = m2.Parameters[i];
+                    ParameterDefinition pa = m1.Parameters[i];
+                    ParameterDefinition pb = m2.Parameters[i];
 
                     if (pa.ParameterType.FullName != pb.ParameterType.FullName)
                     {
@@ -504,15 +500,19 @@ namespace AssemblyDifferences.Introspection
 
         public static bool IsEqual(this EventDefinition e1, EventDefinition e2)
         {
-            var lret = false;
+            bool lret = false;
 
-            if (e1.Name == e2.Name && e1.EventType.FullName == e2.EventType.FullName && e1.AddMethod.IsEqual(e2.AddMethod))
+            if (
+                e1.Name == e2.Name &&
+                e1.EventType.FullName == e2.EventType.FullName &&
+                e1.AddMethod.IsEqual(e2.AddMethod))
             {
                 lret = true;
             }
 
             return lret;
         }
+
 
         public static bool IsEqual(this MethodReference x, MethodReference y)
         {
@@ -522,58 +522,54 @@ namespace AssemblyDifferences.Introspection
         public static bool IsEqual(this MethodReference x, MethodReference y, bool bCompareGenericParameters)
         {
             if (x == null && y == null)
-            {
                 return true;
-            }
 
-            if ((x == null && y != null) || (x != null && y == null))
+            if ((x == null && y != null) ||
+                (x != null && y == null))
             {
                 return false;
             }
 
-            var lret = false;
+            bool lret = false;
 
-            if (x.Name == y.Name && x.DeclaringType.GetOriginalType().IsEqual(y.DeclaringType.GetOriginalType(), bCompareGenericParameters) && x.ReturnType.ReturnType.IsEqual(y.ReturnType.ReturnType, bCompareGenericParameters) && x.Parameters.IsEqual(y.Parameters, bCompareGenericParameters))
+            if (x.Name == y.Name &&
+                x.DeclaringType.GetElementType().IsEqual(y.DeclaringType.GetElementType(), bCompareGenericParameters) &&
+                x.ReturnType.IsEqual(y.ReturnType, bCompareGenericParameters) &&
+                x.Parameters.IsEqual(y.Parameters, bCompareGenericParameters))
             {
                 if (bCompareGenericParameters)
-                {
                     lret = x.GenericParameters.IsEqual(y.GenericParameters);
-                }
                 else
-                {
                     lret = true;
-                }
             }
 
             return lret;
         }
 
-        public static bool IsEqual(this ParameterDefinitionCollection x, ParameterDefinitionCollection y)
+        public static bool IsEqual(this Collection<ParameterDefinition> x, Collection<ParameterDefinition> y)
         {
             return x.IsEqual(y, true);
         }
 
-        public static bool IsEqual(this ParameterDefinitionCollection x, ParameterDefinitionCollection y, bool bCompareGenericParameters)
+        public static bool IsEqual(this Collection<ParameterDefinition> x, Collection<ParameterDefinition> y, bool bCompareGenericParameters)
         {
             if (x == null && y == null)
-            {
                 return true;
-            }
 
-            if ((x == null && y != null) || (x != null && y == null))
+            if ((x == null && y != null) ||
+                (x != null && y == null))
             {
                 return false;
             }
 
             if (x.Count != y.Count)
-            {
                 return false;
-            }
 
-            for (var i = 0; i < x.Count; i++)
+            for (int i = 0; i < x.Count; i++)
             {
-                var p1 = x[i];
-                var p2 = y[i];
+                ParameterDefinition p1 = x[i];
+                ParameterDefinition p2 = y[i];
+
 
                 if (!p1.ParameterType.IsEqual(p2.ParameterType, bCompareGenericParameters))
                 {
@@ -595,33 +591,25 @@ namespace AssemblyDifferences.Introspection
             return true;
         }
 
-        private static string ExractAssemblyNameFromScope(IMetadataScope x)
+        static string ExractAssemblyNameFromScope(IMetadataScope x)
         {
-            var aRef = x as AssemblyNameReference;
+            AssemblyNameReference aRef = x as AssemblyNameReference;
             if (aRef != null)
-            {
                 return aRef.Name;
-            }
 
-            var aDef = x as AssemblyNameDefinition;
+            AssemblyNameDefinition aDef = x as AssemblyNameDefinition;
             if (aDef != null)
-            {
                 return aDef.Name;
-            }
 
-            var aMod = x as ModuleDefinition;
+            ModuleDefinition aMod = x as ModuleDefinition;
             if (aMod != null)
-            {
                 return aMod.Assembly.Name.Name;
-            }
 
             // normally the module name has the dll name but 
             // this is not the case for mscorlib where CommonLanguageRuntime is inside it
-            var aModRef = x as ModuleReference;
+            ModuleReference aModRef = x as ModuleReference;
             if (aModRef != null)
-            {
                 return Path.GetFileNameWithoutExtension(aModRef.Name);
-            }
 
             return x.Name;
         }
@@ -629,24 +617,23 @@ namespace AssemblyDifferences.Introspection
         public static bool IsEqual(this IMetadataScope x, IMetadataScope y)
         {
             if (x == null && y == null)
-            {
                 return true;
-            }
 
-            if ((x == null && y != null) || (x != null && y == null))
+            if ((x == null && y != null) ||
+              (x != null && y == null))
             {
                 return false;
             }
 
-            var xName = ExractAssemblyNameFromScope(x);
-            var yName = ExractAssemblyNameFromScope(y);
+            string xName = ExractAssemblyNameFromScope(x);
+            string yName = ExractAssemblyNameFromScope(y);
 
             return xName == yName;
         }
 
         public static bool IsEqual(this TypeReference x, TypeReference y)
         {
-            var lret = x.IsEqual(y, true);
+            bool lret = x.IsEqual(y, true);
             return lret;
         }
 
@@ -657,7 +644,8 @@ namespace AssemblyDifferences.Introspection
                 return true;
             }
 
-            if ((x == null && y != null) || (x != null && y == null))
+            if ((x == null && y != null) ||
+                (x != null && y == null))
             {
                 return false;
             }
@@ -666,27 +654,24 @@ namespace AssemblyDifferences.Introspection
         }
 
         /// <summary>
-        ///     Type names for generic in class instantiations beginn with ! to denote the number of
-        ///     the generic argument of the enclosing class.
-        ///     System.Collections.Generic.KeyValuePair`2&lt;int32,float32&gt;::.ctor(!0,!1)
-        ///     where !0 and !1 are the position number of the generic type.
-        ///     Method references to generic functions specify the type reference by two !! to number them
-        ///     e.g. !!0 !!1
+        /// Type names for generic in class instantiations beginn with ! to denote the number of
+        /// the generic argument of the enclosing class.
+        /// System.Collections.Generic.KeyValuePair`2&lt;int32,float32&gt;::.ctor(!0,!1)
+        /// where !0 and !1 are the position number of the generic type.
+        /// Method references to generic functions specify the type reference by two !! to number them
+        /// e.g. !!0 !!1
         /// </summary>
         /// <param name="n1"></param>
         /// <param name="n2"></param>
         /// <returns></returns>
-        private static bool AreTypeNamesEqual(string n1, string n2)
+        static bool AreTypeNamesEqual(string n1, string n2)
         {
             if (n1 == n2)
-            {
                 return true;
-            }
 
-            if (n1[0] == '!' || n2[0] == '!')
-            {
+            if (n1[0] == '!' ||
+                n2[0] == '!')
                 return true;
-            }
 
             return false;
         }
@@ -711,26 +696,29 @@ namespace AssemblyDifferences.Introspection
         public static bool IsEqual(this TypeReference x, TypeReference y, bool bCompareGenericParameters)
         {
             if (x == null && y == null)
-            {
                 return true;
-            }
 
-            if ((x == null && y != null) || (x != null && y == null))
+            if ((x == null && y != null) ||
+                (x != null && y == null))
             {
                 return false;
             }
 
-            var lret = false;
+            bool lret = false;
 
-            var xDeclaring = x.DeclaringType;
-            var yDeclaring = y.DeclaringType;
+            TypeReference xDeclaring = x.DeclaringType;
+            TypeReference yDeclaring = y.DeclaringType;
 
-            xDeclaring.IsNotNull(() => xDeclaring = x.DeclaringType.GetOriginalType());
-            yDeclaring.IsNotNull(() => yDeclaring = y.DeclaringType.GetOriginalType());
+            xDeclaring.IsNotNull(() => xDeclaring = x.DeclaringType.GetElementType());
+            yDeclaring.IsNotNull(() => yDeclaring = y.DeclaringType.GetElementType());
+
 
             // Generic parameters are passed as placeholder via method reference
             //  newobj instance void class [BaseLibraryV1]BaseLibrary.ApiChanges.PublicGenericClass`1<string>::.ctor(class [System.Core]System.Func`1<!0>)
-            if (AreTypeNamesEqual(x.Name, y.Name) && x.Namespace == y.Namespace && IsEqual(xDeclaring, yDeclaring, bCompareGenericParameters) && x.Scope.IsEqual(y.Scope))
+            if (AreTypeNamesEqual(x.Name, y.Name) &&
+                x.Namespace == y.Namespace &&
+                IsEqual(xDeclaring, yDeclaring, bCompareGenericParameters) &&
+                x.Scope.IsEqual(y.Scope))
             {
                 if (bCompareGenericParameters)
                 {
@@ -745,8 +733,8 @@ namespace AssemblyDifferences.Introspection
             if (lret)
             {
                 // Generics can have 
-                var xGen = x as GenericInstanceType;
-                var yGen = y as GenericInstanceType;
+                GenericInstanceType xGen = x as GenericInstanceType;
+                GenericInstanceType yGen = y as GenericInstanceType;
                 if (xGen != null && yGen != null)
                 {
                     lret = xGen.IsEqual(yGen);
@@ -758,9 +746,19 @@ namespace AssemblyDifferences.Introspection
 
         public static bool IsEqual(this FieldDefinition f1, FieldDefinition f2)
         {
-            var lret = false;
+            bool lret = false;
 
-            if (f1 != null && f1.IsPublic == f2.IsPublic && f1.IsFamilyOrAssembly == f2.IsFamilyOrAssembly && f1.IsFamily == f2.IsFamily && f1.IsAssembly == f2.IsAssembly && f1.IsPrivate == f2.IsPrivate && f1.IsStatic == f2.IsStatic && f1.HasConstant == f2.HasConstant && f1.IsInitOnly == f2.IsInitOnly && f1.Name == f2.Name && f1.FieldType.FullName == f2.FieldType.FullName)
+            if (f1 != null &&
+                f1.IsPublic == f2.IsPublic &&
+                f1.IsFamilyOrAssembly == f2.IsFamilyOrAssembly &&
+                f1.IsFamily == f2.IsFamily &&
+                f1.IsAssembly == f2.IsAssembly &&
+                f1.IsPrivate == f2.IsPrivate &&
+                f1.IsStatic == f2.IsStatic &&
+                f1.HasConstant == f2.HasConstant &&
+                f1.IsInitOnly == f2.IsInitOnly &&
+                f1.Name == f2.Name &&
+                f1.FieldType.FullName == f2.FieldType.FullName)
             {
                 lret = true;
             }
@@ -771,13 +769,11 @@ namespace AssemblyDifferences.Introspection
         public static List<FieldDefinition> FilterFields(this TypeDefinition type, FilterMode mode)
         {
             var filter = FilterFunctions.GetFieldFilter(mode);
-            var fields = new List<FieldDefinition>();
+            List<FieldDefinition> fields = new List<FieldDefinition>();
             foreach (FieldDefinition fieldDef in type.Fields)
             {
                 if (filter(type, fieldDef))
-                {
                     fields.Add(fieldDef);
-                }
             }
 
             return fields;
@@ -786,13 +782,11 @@ namespace AssemblyDifferences.Introspection
         public static List<MethodDefinition> FilterMethods(this TypeDefinition type, FilterMode mode)
         {
             var filter = FilterFunctions.GetMethodFilter(mode);
-            var methods = new List<MethodDefinition>();
+            List<MethodDefinition> methods = new List<MethodDefinition>();
             foreach (MethodDefinition methodDef in type.Methods)
             {
                 if (filter(type, methodDef))
-                {
                     methods.Add(methodDef);
-                }
             }
             return methods;
         }
@@ -800,39 +794,36 @@ namespace AssemblyDifferences.Introspection
         public static List<EventDefinition> FilterEvents(this TypeDefinition type, FilterMode mode)
         {
             var filter = FilterFunctions.GetEventFilter(mode);
-            var events = new List<EventDefinition>();
+            List<EventDefinition> events = new List<EventDefinition>();
             foreach (EventDefinition ev in type.Events)
             {
                 if (filter(type, ev))
-                {
                     events.Add(ev);
-                }
             }
 
             return events;
         }
 
-        public static bool IsEqual(this GenericArgumentCollection genArgs1, GenericArgumentCollection genArgs2)
+        public static bool IsEqual(this Collection<TypeReference> genArgs1, Collection<TypeReference> genArgs2)
         {
             if (genArgs1 == null && genArgs2 == null)
             {
                 return true;
             }
 
-            if ((genArgs1 == null && genArgs2 != null) || (genArgs1 != null && genArgs2 == null))
+            if ((genArgs1 == null && genArgs2 != null) ||
+                 (genArgs1 != null && genArgs2 == null))
             {
                 return false;
             }
 
             if (genArgs1.Count != genArgs2.Count)
-            {
                 return false;
-            }
 
-            for (var i = 0; i < genArgs1.Count; i++)
+            for (int i = 0; i < genArgs1.Count; i++)
             {
-                var type1 = genArgs1[i];
-                var type2 = genArgs2[i];
+                TypeReference type1 = genArgs1[i];
+                TypeReference type2 = genArgs2[i];
                 if (!type1.IsEqual(type2))
                 {
                     return false;
@@ -842,31 +833,26 @@ namespace AssemblyDifferences.Introspection
             return true;
         }
 
-        public static bool IsEqual(this GenericParameterCollection collection1, GenericParameterCollection collection2)
+        public static bool IsEqual(this Collection<GenericParameter> collection1, Collection<GenericParameter> collection2)
         {
             if (collection1 == null && collection2 == null)
-            {
                 return true;
-            }
 
-            if ((collection1 == null && collection2 != null) || (collection1 != null && collection2 == null))
-            {
+            if ((collection1 == null && collection2 != null) ||
+                (collection1 != null && collection2 == null))
                 return false;
-            }
 
             if (collection1.Count != collection2.Count)
-            {
                 return false;
-            }
 
-            var lret = true;
+            bool lret = true;
 
-            for (var i = 0; i < collection1.Count; i++)
+            for (int i = 0; i < collection1.Count; i++)
             {
-                var param1 = collection1[i];
-                var param2 = collection2[i];
+                GenericParameter param1 = collection1[i];
+                GenericParameter param2 = collection2[i];
 
-                if (param1.FullName != param2.FullName)
+                if (param1.FullName != param2.FullName && param1.FullName[0] != '!' && param2.FullName[0] != '!')
                 {
                     lret = false;
                     break;

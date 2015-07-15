@@ -63,14 +63,14 @@ namespace AssemblyDifferences.Query.usagequeries
                 if (method.IsEqual(searchEvent.AddMethod, false))
                 {
                     context = new MatchContext(AddEventReason, this.GetPrettyEventName(searchEvent));
-                    context[DefiningAssemblyKey] = searchEvent.DeclaringType.Module.Image.FileInformation.Name;
+                    context[DefiningAssemblyKey] = searchEvent.DeclaringType.Module.FullyQualifiedName;
                     break;
                 }
 
                 if (method.IsEqual(searchEvent.RemoveMethod, false))
                 {
                     context = new MatchContext(RemoveEventReason, this.GetPrettyEventName(searchEvent));
-                    context[DefiningAssemblyKey] = searchEvent.DeclaringType.Module.Image.FileInformation.Name;
+                    context[DefiningAssemblyKey] = searchEvent.DeclaringType.Module.FullyQualifiedName;
                     break;
                 }
             }

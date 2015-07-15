@@ -44,9 +44,9 @@ namespace AssemblyDifferences.Query.usagequeries
             matchingMethod = null;
 
             var declaringType = "";
-            if (methodReference != null && methodReference.DeclaringType != null && methodReference.DeclaringType.GetOriginalType() != null)
+            if (methodReference != null && methodReference.DeclaringType != null && methodReference.DeclaringType.GetElementType() != null)
             {
-                declaringType = methodReference.DeclaringType.GetOriginalType().Name;
+                declaringType = methodReference.DeclaringType.GetElementType().Name;
             }
 
             List<MethodDefinition> typeMethods = null;

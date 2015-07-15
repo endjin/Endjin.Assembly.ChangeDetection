@@ -1,6 +1,7 @@
 namespace AssemblyDifferences.Query.usagequeries
 {
     using System;
+    using System.Linq;
 
     using AssemblyDifferences.Introspection;
 
@@ -24,40 +25,41 @@ namespace AssemblyDifferences.Query.usagequeries
             this.Aggregator.AddVisitScope(type.Module.Assembly.Name.Name);
         }
 
-        public override void VisitMethodBody(MethodBody body)
+        public override void VisitMethodBody(Mono.Cecil.Cil.MethodBody body)
         {
+            var methodDefinitions = myType.Methods.Where(x => x.IsConstructor).ToList();
             foreach (Instruction instr in body.Instructions)
             {
                 if (instr.OpCode.Code == Code.Newobj)
                 {
-                    foreach (MethodReference method in this.myType.Constructors)
+                    foreach (MethodReference method in methodDefinitions)
                     {
                         if (method.IsEqual((MethodReference)instr.Operand, false))
                         {
-                            var context = new MatchContext(ConstructorCalledContext, this.myType.Print());
-                            this.Aggregator.AddMatch(instr, body.Method, true, context);
+                            MatchContext context = new MatchContext(ConstructorCalledContext, myType.Print());
+                            Aggregator.AddMatch(instr, body.Method, true, context);
                         }
                     }
                 }
                 else if (instr.OpCode.Code == Code.Initobj)
                 {
-                    var typeRef = (TypeReference)instr.Operand;
-                    if (typeRef.IsEqual(this.myType))
+                    TypeReference typeRef = (TypeReference)instr.Operand;
+                    if (typeRef.IsEqual(myType))
                     {
-                        var context = new MatchContext("Struct Constructor() called", this.myType.Print());
-                        this.Aggregator.AddMatch(instr, body.Method, true, context);
+                        MatchContext context = new MatchContext("Struct Constructor() called", myType.Print());
+                        Aggregator.AddMatch(instr, body.Method, true, context);
                     }
                 }
                 else if (instr.OpCode.Code == Code.Call)
                 {
                     // Value types are instantiated by directly calling the corresponding ctor
-                    var methodRef = (MethodReference)instr.Operand;
+                    MethodReference methodRef = (MethodReference)instr.Operand;
                     if (methodRef.Name == ".ctor")
                     {
-                        if (methodRef.DeclaringType.IsEqual(this.myType))
+                        if (methodRef.DeclaringType.IsEqual(myType))
                         {
-                            var context = new MatchContext(ConstructorCalledContext, this.myType.Print());
-                            this.Aggregator.AddMatch(instr, body.Method, false, context);
+                            MatchContext context = new MatchContext(ConstructorCalledContext, myType.Print());
+                            Aggregator.AddMatch(instr, body.Method, false, context);
                         }
                     }
                 }

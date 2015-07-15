@@ -6,7 +6,6 @@ namespace AssemblyDifferences.Introspection
     using AssemblyDifferences.Infrastructure;
 
     using Mono.Cecil;
-    using Mono.Cecil.Binary;
 
     public class AssemblyLoader
     {
@@ -30,11 +29,14 @@ namespace AssemblyDifferences.Introspection
             return false;
         }
 
-        public static AssemblyDefinition LoadCecilAssembly(string fileName)
+        public static AssemblyDefinition LoadCecilAssembly(string fileName, bool immediateLoad = false, bool? readSymbols = null)
         {
             using (var t = new Tracer(Level.L5, myType, "LoadCecilAssembly"))
             {
-                if (new FileInfo(fileName).Length == 0)
+                var pdbPath = Path.ChangeExtension(fileName, "pdb");
+                var tryReadSymbols = readSymbols ?? File.Exists(pdbPath);
+                var fileInfo = new FileInfo(fileName);
+                if (fileInfo.Length == 0)
                 {
                     t.Info("File {0} has zero byte length", fileName);
                     return null;
@@ -42,7 +44,11 @@ namespace AssemblyDifferences.Introspection
 
                 try
                 {
-                    var assemblyDef = AssemblyFactory.GetAssembly(fileName);
+                    var readingMode = immediateLoad ? ReadingMode.Immediate : ReadingMode.Deferred;
+                    var assemblyResolver = new DefaultAssemblyResolver();
+                    assemblyResolver.AddSearchDirectory(fileInfo.Directory.FullName);
+                    var readerParameters = new ReaderParameters { ReadSymbols = tryReadSymbols, ReadingMode = readingMode, AssemblyResolver = assemblyResolver };
+                    var assemblyDef = AssemblyDefinition.ReadAssembly(fileName, readerParameters);
 
                     // Managed C++ assemblies are not supported by Mono Cecil
                     if (IsManagedCppAssembly(assemblyDef))
@@ -53,10 +59,7 @@ namespace AssemblyDifferences.Introspection
 
                     return assemblyDef;
                 }
-                catch (ImageFormatException) // Ignore invalid images
-                {
-                }
-                catch (BadImageFormatException) // ignore invalid PE files
+                catch (BadImageFormatException) // Ignore invalid images
                 {
                 }
                 catch (IndexOutOfRangeException)

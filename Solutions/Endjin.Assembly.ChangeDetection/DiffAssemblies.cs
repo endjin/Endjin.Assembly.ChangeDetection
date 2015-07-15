@@ -17,7 +17,7 @@ namespace AssemblyDifferences
 
         protected void Validate()
         {
-            /*base.Validate();
+            /*base.Detect();
 
             ValidateFileQuery(myParsedArgs.NewFiles,
                         "-new <filequery> is missing.",

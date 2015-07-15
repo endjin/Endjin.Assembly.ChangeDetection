@@ -1,5 +1,7 @@
 namespace AssemblyDifferences.Introspection
 {
+    #region Using Directives
+
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -11,19 +13,16 @@ namespace AssemblyDifferences.Introspection
     using Mono.Cecil.Cil;
     using Mono.Cecil.Pdb;
 
+    #endregion
+
     public class PdbInformationReader : IDisposable
     {
         private static readonly TypeHashes myType = new TypeHashes(typeof(PdbInformationReader));
-
-        private readonly PdbDownLoader myDownLoader = new PdbDownLoader();
-
-        private readonly HashSet<string> myFailedPdbs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
+        private readonly PdbReaderProvider myPdbFactory = new PdbReaderProvider();
         private readonly Dictionary<string, ISymbolReader> myFile2PdbMap = new Dictionary<string, ISymbolReader>(StringComparer.OrdinalIgnoreCase);
-
-        private readonly PdbFactory myPdbFactory = new PdbFactory();
-
+        private readonly HashSet<string> myFailedPdbs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         private readonly string mySymbolServer;
+        private readonly PdbDownLoader myDownLoader = new PdbDownLoader();
 
         public PdbInformationReader()
         {
@@ -34,24 +33,11 @@ namespace AssemblyDifferences.Introspection
             this.mySymbolServer = symbolServer;
         }
 
-        #region IDisposable Members
-
-        public void Dispose()
-        {
-            // release pdbs
-            foreach (var reader in this.myFile2PdbMap.Values)
-            {
-                reader.Dispose();
-            }
-            this.myFile2PdbMap.Clear();
-        }
-
-        #endregion
-
         public void ReleasePdbForModule(ModuleDefinition module)
         {
-            var fileName = module.Assembly.MainModule.Image.FileInformation.FullName;
+            string fileName = module.Assembly.MainModule.FullyQualifiedName;
             ISymbolReader reader;
+
             if (this.myFile2PdbMap.TryGetValue(fileName, out reader))
             {
                 reader.Dispose();
@@ -61,9 +47,9 @@ namespace AssemblyDifferences.Introspection
 
         public ISymbolReader LoadPdbForModule(ModuleDefinition module)
         {
-            using (var t = new Tracer(myType, "LoadPdbForModule"))
+            using (Tracer t = new Tracer(myType, "LoadPdbForModule"))
             {
-                var fileName = module.Assembly.MainModule.Image.FileInformation.FullName;
+                string fileName = module.Assembly.MainModule.FullyQualifiedName;
                 t.Info("Module file name: {0}", fileName);
                 ISymbolReader reader = null;
 
@@ -75,11 +61,11 @@ namespace AssemblyDifferences.Introspection
                         return reader;
                     }
 
-                    for (var i = 0; i < 2; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         try
                         {
-                            reader = this.myPdbFactory.CreateReader(module, fileName);
+                            reader = this.myPdbFactory.GetSymbolReader(module, fileName);
                             this.myFile2PdbMap[fileName] = reader;
                             break;
                         }
@@ -87,7 +73,7 @@ namespace AssemblyDifferences.Introspection
                         {
                             t.Error(Level.L3, ex, "Pdb did not match or it is not present");
 
-                            var pdbFileName = Path.Combine(Path.GetDirectoryName(fileName), Path.GetFileNameWithoutExtension(fileName) + ".pdb");
+                            string pdbFileName = Path.Combine(Path.GetDirectoryName(fileName), Path.GetFileNameWithoutExtension(fileName) + ".pdb");
                             try
                             {
                                 File.Delete(pdbFileName);
@@ -98,13 +84,13 @@ namespace AssemblyDifferences.Introspection
                             }
 
                             // When we have symbol server we try to make us of it for matches.
-                            if (string.IsNullOrEmpty(this.mySymbolServer))
+                            if (String.IsNullOrEmpty(this.mySymbolServer))
                             {
                                 break;
                             }
 
                             t.Info("Try to download pdb from symbol server {0}", this.mySymbolServer);
-                            var bDownloaded = this.myDownLoader.DownloadPdbs(new FileQuery(fileName), this.mySymbolServer);
+                            bool bDownloaded = this.myDownLoader.DownloadPdbs(new FileQuery(fileName), this.mySymbolServer);
                             t.Info("Did download pdb {0} from symbol server with return code: {1}", fileName, bDownloaded);
 
                             if (bDownloaded == false || i == 1) // second try did not work out as well
@@ -120,20 +106,34 @@ namespace AssemblyDifferences.Introspection
             }
         }
 
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            // release pdbs
+            foreach (ISymbolReader reader in this.myFile2PdbMap.Values)
+            {
+                reader.Dispose();
+            }
+            this.myFile2PdbMap.Clear();
+        }
+
+        #endregion
+
         /// <summary>
-        ///     Try to get the file name where the type is defined from the pdb via walking
-        ///     through some methods
+        /// Try to get the file name where the type is defined from the pdb via walking
+        /// through some methods
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
         public KeyValuePair<string, int> GetFileLine(TypeDefinition type)
         {
-            var fileLine = new KeyValuePair<string, int>("", 0);
+            KeyValuePair<string, int> fileLine = new KeyValuePair<string, int>("", 0);
 
-            for (var i = 0; i < type.Methods.Count; i++)
+            for (int i = 0; i < type.Methods.Count; i++)
             {
                 fileLine = this.GetFileLine(type.Methods[i].Body);
-                if (!string.IsNullOrEmpty(fileLine.Key))
+                if (!String.IsNullOrEmpty(fileLine.Key))
                 {
                     break;
                 }
@@ -151,10 +151,9 @@ namespace AssemblyDifferences.Introspection
             if (body != null)
             {
                 var symbolReader = this.LoadPdbForModule(body.Method.DeclaringType.Module);
+
                 if (symbolReader != null)
                 {
-                    symbolReader.Read(body);
-
                     foreach (Instruction ins in body.Instructions)
                     {
                         if (ins.SequencePoint != null)
@@ -170,7 +169,7 @@ namespace AssemblyDifferences.Introspection
 
         private bool HasValidFileAndLineNumber(Instruction ins)
         {
-            var lret = true;
+            bool lret = true;
             if (ins == null)
             {
                 lret = false;
@@ -196,7 +195,7 @@ namespace AssemblyDifferences.Introspection
 
         private Instruction GetILInstructionWithLineNumber(Instruction ins, bool bSearchForward)
         {
-            var current = ins;
+            Instruction current = ins;
             if (bSearchForward)
             {
                 while (current != null && !this.HasValidFileAndLineNumber(current))
@@ -216,26 +215,22 @@ namespace AssemblyDifferences.Introspection
         }
 
         /// <summary>
-        ///     Get for a specific IL instruction the matching file and line.
+        /// Get for a specific IL instruction the matching file and line.
         /// </summary>
         /// <param name="ins"></param>
         /// <param name="method"></param>
-        /// <param name="bSearchForward">
-        ///     Search the next il instruction first if set to true for the line number from the pdb. If
-        ///     nothing is found we search backward.
-        /// </param>
+        /// <param name="bSearchForward">Search the next il instruction first if set to true for the line number from the pdb. If nothing is found we search backward.</param>
         /// <returns></returns>
         public KeyValuePair<string, int> GetFileLine(Instruction ins, MethodDefinition method, bool bSearchForward)
         {
-            using (var t = new Tracer(myType, "GetFileLine"))
+            using (Tracer t = new Tracer(myType, "GetFileLine"))
             {
                 t.Info("Try to get file and line info for {0} {1} forwardSearch {2}", method.DeclaringType.FullName, method.Name, bSearchForward);
 
                 var symReader = this.LoadPdbForModule(method.DeclaringType.Module);
                 if (symReader != null && method.Body != null)
                 {
-                    symReader.Read(method.Body);
-                    var current = ins;
+                    Instruction current = ins;
 
                     if (bSearchForward)
                     {
@@ -270,8 +265,8 @@ namespace AssemblyDifferences.Introspection
 
         private string PatchDriveLetter(string url)
         {
-            var root = Directory.GetDirectoryRoot(Directory.GetCurrentDirectory());
-            var sb = new StringBuilder(url);
+            string root = Directory.GetDirectoryRoot(Directory.GetCurrentDirectory());
+            StringBuilder sb = new StringBuilder(url);
             sb[0] = root[0];
             return sb.ToString();
         }

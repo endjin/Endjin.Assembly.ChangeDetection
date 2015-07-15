@@ -4,8 +4,7 @@ namespace AssemblyDifferences.Query.usagequeries
 
     using Mono.Cecil;
 
-    public class QueryResult<T>
-        where T : IMemberReference
+    public class QueryResult<T> where T : MemberReference
     {
         private MatchContext myAnnotations;
 
