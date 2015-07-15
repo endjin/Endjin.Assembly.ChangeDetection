@@ -38,7 +38,7 @@
         {
             var results = ScenarioContext.Current.Get<bool>("Results");
 
-            results.ShouldBeFalse();
+            results.ShouldBeTrue();
         }
 
         [Then(@"I should be told that the rule has not been violated")]
@@ -46,7 +46,7 @@
         {
             var results = ScenarioContext.Current.Get<bool>("Results");
 
-            results.ShouldBeTrue();
+            results.ShouldBeFalse();
         }
     }
 }
