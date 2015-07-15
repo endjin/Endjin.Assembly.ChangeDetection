@@ -11,19 +11,19 @@
 
     public class CommandOptions
     {
-        [Option('s', "description", DefaultValue = false, HelpText = "Help Text")]
-        public bool EnableSlowCheetahSupport { get; set; }
-
+        [Option('p', "previous assembly", HelpText = "Help Text")]
         public string PreviousAssembly { get; set; }
 
+        [Option('c', "current assembly", HelpText = "Help Text")]
         public string CurrentAssembly { get; set; }
 
+        [Option('v', "proposed version number", HelpText = "Help Text")]
         public string ProposedVersionNumber { get; set; }
 
         [HelpOption(HelpText = "Display this help text.")]
         public string GetUsage()
         {
-            var help = new HelpText(new HeadingInfo("DeployFx for Windows Azure", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()))
+            var help = new HelpText(new HeadingInfo("Semantic Versioning", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()))
             {
                 AdditionalNewLineAfterOption = false,
                 MaximumDisplayWidth = Console.WindowWidth,
@@ -31,7 +31,7 @@
             };
 
             help.AddPreOptionsLine("Usage:");
-            help.AddPreOptionsLine(@"    ConfigureFx.AzureConfigTokenizer.exe -f <PATH>\ServiceConfiguration.Cloud.cscfg -c <PATH>\ServiceConfiguration.cscfg -e <PATH>\environmentConfig.xml -s");
+            help.AddPreOptionsLine(@"    Endjin.SemanticVersioning.TeamCity.exe -p <PATH>\foo.dll -c <PATH>\foo.dll -v '2.0.0'");
             help.AddOptions(this);
 
             return help;

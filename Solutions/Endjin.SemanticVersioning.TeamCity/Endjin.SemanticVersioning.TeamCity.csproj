@@ -40,8 +40,11 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyAttributeExtensions.cs" />
+    <Compile Include="CodeGen.cs" />
     <Compile Include="CommandLineProcessor.cs" />
     <Compile Include="CommandOptions.cs" />
     <Compile Include="Program.cs" />
