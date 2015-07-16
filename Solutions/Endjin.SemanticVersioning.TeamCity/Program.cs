@@ -6,6 +6,8 @@
 
     using AssemblyDifferences.SemVer;
 
+    using ILMerging;
+
     #endregion
 
     public class Program
@@ -24,7 +26,18 @@
 
                 if (result.BreakingChangesDetected)
                 {
-                    new CodeGenerator().GenerateVersionDetailsAssembly(options.CurrentAssembly, "Release", result.VersionNumber, result.VersionNumber, result.VersionNumber);
+                    var dynamicAssembly = new CodeGenerator().GenerateVersionDetailsDynamicAssembly(options.CurrentAssembly, result.VersionNumber, result.VersionNumber, result.VersionNumber);
+
+                    ILMerge merge = new ILMerge
+                    {
+                        TargetKind = ILMerge.Kind.Dll,
+                        AttributeFile = dynamicAssembly,
+                        OutputFile = options.CurrentAssembly
+                    };
+
+                    merge.SetInputAssemblies(new[] { options.CurrentAssembly } );
+
+                    merge.Merge();
 
                     Console.WriteLine("##teamcity[buildNumber '" + result.VersionNumber + "']");
                 }
