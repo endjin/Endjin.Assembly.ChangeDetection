@@ -17,27 +17,24 @@
             try
             {
                 var commandLineProcessor = new CommandLineProcessor();
-
                 var options = commandLineProcessor.Process(args);
-
+                
                 var semanticVersionAnalyzer = new SemanticVersionAnalyzer();
-
                 var result = semanticVersionAnalyzer.Analyze(options.PreviousAssembly, options.CurrentAssembly, options.ProposedVersionNumber);
 
                 if (result.BreakingChangesDetected)
                 {
                     var dynamicAssembly = new CodeGenerator().GenerateVersionDetailsDynamicAssembly(options.CurrentAssembly, result.VersionNumber, result.VersionNumber, result.VersionNumber);
 
-                    ILMerge merge = new ILMerge
+                    var ilMerge = new ILMerge
                     {
                         TargetKind = ILMerge.Kind.Dll,
                         AttributeFile = dynamicAssembly,
-                        OutputFile = options.CurrentAssembly
+                        OutputFile = options.OutputFile
                     };
 
-                    merge.SetInputAssemblies(new[] { options.CurrentAssembly } );
-
-                    merge.Merge();
+                    ilMerge.SetInputAssemblies(new[] { options.CurrentAssembly } );
+                    ilMerge.Merge();
 
                     Console.WriteLine("##teamcity[buildNumber '" + result.VersionNumber + "']");
                 }

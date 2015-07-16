@@ -20,6 +20,9 @@
         [Option('v', "proposed version number", HelpText = "Help Text")]
         public string ProposedVersionNumber { get; set; }
 
+        [Option('o', "output file path", HelpText = "Help Text")]
+        public string OutputFile { get; set; }
+
         [HelpOption(HelpText = "Display this help text.")]
         public string GetUsage()
         {
@@ -31,7 +34,7 @@
             };
 
             help.AddPreOptionsLine("Usage:");
-            help.AddPreOptionsLine(@"    Endjin.SemanticVersioning.TeamCity.exe -p <PATH>\foo.dll -c <PATH>\foo.dll -v '2.0.0'");
+            help.AddPreOptionsLine(@"    Endjin.SemanticVersioning.TeamCity.exe -o <PATH>\foo.final.dll -p <PATH>\foo.dll -c <PATH>\foo.dll -v '2.0.0'");
             help.AddOptions(this);
 
             return help;

@@ -6,6 +6,7 @@
     using System.CodeDom;
     using System.CodeDom.Compiler;
     using System.Diagnostics;
+    using System.IO;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
@@ -46,10 +47,12 @@
 
             using (var provider = CodeDomProvider.CreateProvider("CSharp"))
             {
+                var dynamicAssemblyPath = Path.ChangeExtension(Path.Combine(Path.GetTempPath(), Path.GetTempFileName()), ".dll");
+
                 var parameters = new CompilerParameters
                 {
                     GenerateExecutable = false,
-                    OutputAssembly = Guid.NewGuid() + ".dll"
+                    OutputAssembly = dynamicAssemblyPath
                 };
 
                 var compilerResults = provider.CompileAssemblyFromDom(parameters, codeCompileUnit);
@@ -96,7 +99,6 @@
                 case "AssemblyTrademarkAttribute":
                     codeCompileUnit.AssemblyCustomAttributes.Add(new AssemblyTrademarkAttributeConverter().Convert(attribute as AssemblyTrademarkAttribute));
                     break;
-                // TODO: currently throws a compiler exception 
                 case "CompilationRelaxationsAttribute":
                         codeCompileUnit.AssemblyCustomAttributes.Add(new CompilationRelaxationsAttributeConverter().Convert(attribute as CompilationRelaxationsAttribute));
                         break;
