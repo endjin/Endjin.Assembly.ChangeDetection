@@ -110,6 +110,21 @@
       <Name>Endjin.Assembly.ChangeDetection</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="..\BreakingChange\bin\Debug\Original.dll">
+      <Link>TestData\BreakingChange\Original.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\NonBreakingAdditiveChange\bin\Debug\Original.dll">
+      <Link>TestData\NonBreakingAdditiveChange\Original.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Original\bin\Debug\Original.dll">
+      <Link>TestData\Original\Original.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
