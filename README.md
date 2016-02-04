@@ -30,5 +30,5 @@ Please ping me via @[HowardvRooijen](http://twitter.com/HowardvRooijen)
 ## Acknowledgements: ##
 
 Code from the CodePlex project [APIChange](https://apichange.codeplex.com/) by [Alois Kraus](http://geekswithblogs.net/akraus1/archive/2010/06/03/140207.aspx) have been used.
-As have modification made by [@GrahamTheCoder](http://twitter.com/grahamthecoder) who added new Mono.Cecil integration
+As have modification made by [@GrahamTheCoder](http://twitter.com/grahamthecoder) who upgraded Mono.Cecil to a newer version
 
