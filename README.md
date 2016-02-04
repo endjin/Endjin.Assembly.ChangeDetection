@@ -21,7 +21,7 @@ Ideally I would like the concepts laid out here to become a 1st class feature in
 
 ##Notes##
 
-To get this running locally, you may need to change the hard coded file paths for detecting the assemblies to compare... I really should get around to making that resolvable, but it wasn't what I was trying to prove!
+To get this running locally, you may need install SpecFlow as Visual Studio Extension.
 
 ##Comments##
 
