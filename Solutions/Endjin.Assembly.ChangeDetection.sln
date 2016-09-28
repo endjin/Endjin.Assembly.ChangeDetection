@@ -6,6 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endjin.Assembly.ChangeDetection", "Endjin.Assembly.ChangeDetection\Endjin.Assembly.ChangeDetection.csproj", "{A7A8D13C-9909-470B-9C83-EB9795DFB0AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Endjin.Assembly.ChangeDetection.Specs", "Endjin.Assembly.ChangeDetection.Specs\Endjin.Assembly.ChangeDetection.Specs.csproj", "{A20B8473-85FB-4168-9E58-5B16C096B852}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D78B0500-809E-471B-933A-C48509B9C57C} = {D78B0500-809E-471B-933A-C48509B9C57C}
+		{85164719-6220-4167-8C52-E0406CDE120F} = {85164719-6220-4167-8C52-E0406CDE120F}
+		{282B8835-B9D0-4F6E-B33D-73E9D8BD0D0D} = {282B8835-B9D0-4F6E-B33D-73E9D8BD0D0D}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "@Specs", "@Specs", "{E3C1B4C1-0E54-44C9-8D51-9431FED67BD3}"
 EndProject
