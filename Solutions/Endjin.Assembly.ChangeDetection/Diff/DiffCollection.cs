@@ -1,8 +1,8 @@
-namespace AssemblyDifferences.Diff
-{
-    using System.Collections.Generic;
-    using System.Linq;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Endjin.Assembly.ChangeDetection.Diff
+{
     public class DiffCollection<T> : List<DiffResult<T>>
     {
         public int AddedCount

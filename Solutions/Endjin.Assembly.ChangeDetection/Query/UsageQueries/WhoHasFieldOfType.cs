@@ -1,12 +1,10 @@
-namespace AssemblyDifferences.Query.usagequeries
+using System;
+using System.Collections.Generic;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Query.UsageQueries
 {
-    using System;
-    using System.Collections.Generic;
-
-    using AssemblyDifferences.Introspection;
-
-    using Mono.Cecil;
-
     public class WhoHasFieldOfType : UsageVisitor
     {
         private readonly HashSet<string> mySearchTypeNames = new HashSet<string>();

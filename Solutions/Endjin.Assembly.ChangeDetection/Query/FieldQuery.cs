@@ -1,11 +1,10 @@
-namespace AssemblyDifferences.Query
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Query
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text.RegularExpressions;
-
-    using Mono.Cecil;
-
     public class FieldQuery : BaseQuery
     {
         private const string All = " * *";

@@ -1,12 +1,10 @@
-namespace AssemblyDifferences.Diff
+using System;
+using System.IO;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Diff
 {
-    using System;
-    using System.IO;
-
-    using AssemblyDifferences.Introspection;
-
-    using Mono.Cecil;
-
     public class DiffPrinter
     {
         private readonly TextWriter Out;

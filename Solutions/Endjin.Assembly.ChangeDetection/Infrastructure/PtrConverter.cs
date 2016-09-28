@@ -1,8 +1,8 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Reflection.Emit;
+﻿using System;
+using System.Reflection.Emit;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     /// <summary>
     ///     This class can convert any pointer to a managed object into a true object reference back.
     /// </summary>

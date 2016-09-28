@@ -1,12 +1,11 @@
-namespace AssemblyDifferences.Diff
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Endjin.Assembly.ChangeDetection.Query.UsageQueries;
+
+namespace Endjin.Assembly.ChangeDetection.Diff
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using AssemblyDifferences.Introspection;
-    using AssemblyDifferences.Query.usagequeries;
-
     internal class BreakingChangeSearcher
     {
         private readonly UsageQueryAggregator myAggregator;

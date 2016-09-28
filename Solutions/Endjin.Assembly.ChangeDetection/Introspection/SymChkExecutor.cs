@@ -1,14 +1,13 @@
-﻿namespace AssemblyDifferences.Introspection
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Text.RegularExpressions;
+using Endjin.Assembly.ChangeDetection.Infrastructure;
+
+namespace Endjin.Assembly.ChangeDetection.Introspection
 {
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.IO;
-    using System.Text.RegularExpressions;
-
-    using AssemblyDifferences.Infrastructure;
-
     internal class SymChkExecutor : ISymChkExecutor
     {
         private static readonly TypeHashes myType = new TypeHashes(typeof(SymChkExecutor));

@@ -1,13 +1,11 @@
-﻿namespace Endjin.Assembly.ChangeDetection.Specs.Steps
+﻿using Endjin.Assembly.ChangeDetection.Infrastructure;
+using Endjin.Assembly.ChangeDetection.Rules;
+
+namespace Endjin.Assembly.ChangeDetection.Specs.Steps
 {
     #region Using Directives
 
     using System.Collections.Generic;
-
-    using AssemblyDifferences;
-    using AssemblyDifferences.Infrastructure;
-    using AssemblyDifferences.Rules;
-
     using Should;
 
     using TechTalk.SpecFlow;

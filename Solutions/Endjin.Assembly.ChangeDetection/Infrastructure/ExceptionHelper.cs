@@ -1,10 +1,10 @@
-namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Runtime.InteropServices;
-    using System.Security;
-    using System.Threading;
+using System;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Threading;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     /// <summary>
     ///     Use this class in your catch(Exception ex) handler to determine if you can safely swallow and trace
     ///     this exception or if it is so severe that it should be propagated to the highest layer. It is mandatory to use

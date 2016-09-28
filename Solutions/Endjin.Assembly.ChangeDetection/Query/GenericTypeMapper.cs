@@ -1,11 +1,10 @@
-namespace AssemblyDifferences.Query
+using System;
+using System.Collections.Generic;
+using System.Text;
+using Endjin.Assembly.ChangeDetection.Introspection;
+
+namespace Endjin.Assembly.ChangeDetection.Query
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
-    using AssemblyDifferences.Introspection;
-
     internal static class GenericTypeMapper
     {
         public static string TransformGenericTypeNames(string typeName, Func<string, string> typeNameTransformer)

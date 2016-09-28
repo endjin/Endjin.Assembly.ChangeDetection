@@ -1,17 +1,17 @@
-namespace AssemblyDifferences.Introspection
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using Endjin.Assembly.ChangeDetection.Infrastructure;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+using Mono.Cecil.Pdb;
+
+namespace Endjin.Assembly.ChangeDetection.Introspection
 {
     #region Using Directives
 
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Text;
-
-    using AssemblyDifferences.Infrastructure;
-
-    using Mono.Cecil;
-    using Mono.Cecil.Cil;
-    using Mono.Cecil.Pdb;
+    
 
     #endregion
 

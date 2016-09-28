@@ -1,9 +1,9 @@
-﻿namespace AssemblyDifferences.Query
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Text.RegularExpressions;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
+namespace Endjin.Assembly.ChangeDetection.Query
+{
     /// <summary>
     ///     Parser for a list of type queries separated by ;. A type query can
     /// </summary>

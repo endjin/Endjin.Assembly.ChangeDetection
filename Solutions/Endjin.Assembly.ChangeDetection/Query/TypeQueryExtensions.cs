@@ -1,9 +1,8 @@
-namespace AssemblyDifferences.Query
+using System.Collections.Generic;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Query
 {
-    using System.Collections.Generic;
-
-    using Mono.Cecil;
-
     public static class TypeQueryExtensions
     {
         public static IEnumerable<TypeDefinition> GetMatchingTypes(this List<TypeQuery> list, AssemblyDefinition assembly)

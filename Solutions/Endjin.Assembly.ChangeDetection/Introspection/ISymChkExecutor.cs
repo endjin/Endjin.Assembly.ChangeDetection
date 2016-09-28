@@ -1,7 +1,7 @@
-﻿namespace AssemblyDifferences.Introspection
-{
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace Endjin.Assembly.ChangeDetection.Introspection
+{
     internal interface ISymChkExecutor
     {
         List<string> FailedPdbs { get; set; }

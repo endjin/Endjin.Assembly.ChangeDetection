@@ -1,10 +1,9 @@
-namespace AssemblyDifferences.Diff
+using System.Collections.Generic;
+using System.Diagnostics;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Diff
 {
-    using System.Collections.Generic;
-    using System.Diagnostics;
-
-    using Mono.Cecil;
-
     [DebuggerDisplay("Add {AddedRemovedTypes.AddedCount} Remove {AddedRemovedTypes.RemovedCount} Changed {ChangedTypes.Count}")]
     public class AssemblyDiffCollection
     {

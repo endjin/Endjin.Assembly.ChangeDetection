@@ -1,8 +1,8 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     /// <summary>
     ///     Create a static instance of each class where you want to use tracing.
     ///     It does basically encapsulate the typename and enables fast trace filters.

@@ -1,12 +1,11 @@
-namespace AssemblyDifferences.Infrastructure
+using System;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
+using Microsoft.Win32.SafeHandles;
+
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
 {
-    using System;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.InteropServices;
-    using System.Security.Permissions;
-
-    using Microsoft.Win32.SafeHandles;
-
     /// <summary>
     ///     Wraps a FindFirstFile handle.
     /// </summary>

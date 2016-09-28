@@ -1,7 +1,7 @@
-namespace AssemblyDifferences.Infrastructure
-{
-    using System;
+using System;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     /// <summary>
     ///     There are currently 4 combinations possible but I want to
     ///     stay extensible since some .NET Framework patch might need

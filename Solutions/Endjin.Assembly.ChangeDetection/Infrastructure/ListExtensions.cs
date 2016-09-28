@@ -1,9 +1,9 @@
-namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     public static class ListExtensions
     {
         public static string GetSearchDirs(this List<FileQuery> queries)

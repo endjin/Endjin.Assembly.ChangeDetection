@@ -1,4 +1,4 @@
-﻿namespace AssemblyDifferences.Infrastructure
+﻿namespace Endjin.Assembly.ChangeDetection.Infrastructure
 {
     class TraceFilterMatchNone : TraceFilter
     {

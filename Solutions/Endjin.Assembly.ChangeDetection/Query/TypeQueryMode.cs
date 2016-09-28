@@ -1,7 +1,7 @@
-namespace AssemblyDifferences.Query
-{
-    using System;
+using System;
 
+namespace Endjin.Assembly.ChangeDetection.Query
+{
     [Flags]
     public enum TypeQueryMode
     {

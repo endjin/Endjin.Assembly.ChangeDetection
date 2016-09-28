@@ -1,15 +1,13 @@
-namespace AssemblyDifferences.Query.usagequeries
+using System;
+using System.Collections.Generic;
+using Endjin.Assembly.ChangeDetection.Infrastructure;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+using Mono.Collections.Generic;
+
+namespace Endjin.Assembly.ChangeDetection.Query.UsageQueries
 {
-    using System;
-    using System.Collections.Generic;
-
-    using AssemblyDifferences.Infrastructure;
-    using AssemblyDifferences.Introspection;
-
-    using Mono.Cecil;
-    using Mono.Cecil.Cil;
-    using Mono.Collections.Generic;
-
     /// <summary>
     ///     Search for users of type
     ///     - as base type

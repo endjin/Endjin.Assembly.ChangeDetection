@@ -1,7 +1,7 @@
-namespace AssemblyDifferences.Introspection
-{
-    using System.Collections.Generic;
+using System.Collections.Generic;
 
+namespace Endjin.Assembly.ChangeDetection.Introspection
+{
     public class TypeMapper
     {
         private static readonly Dictionary<string, string> mySimpleType2FullType = new Dictionary<string, string>

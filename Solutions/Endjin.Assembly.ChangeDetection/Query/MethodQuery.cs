@@ -1,14 +1,12 @@
-namespace AssemblyDifferences.Query
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.RegularExpressions;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Query
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using System.Text.RegularExpressions;
-
-    using AssemblyDifferences.Introspection;
-
-    using Mono.Cecil;
-
     public class MethodQuery : BaseQuery
     {
         protected internal bool? myIsVirtual;

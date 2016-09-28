@@ -1,9 +1,8 @@
-namespace AssemblyDifferences.Introspection
+using System;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Introspection
 {
-    using System;
-
-    using Mono.Cecil;
-
     public static class FilterFunctions
     {
         public static Func<TypeDefinition, MethodDefinition, bool> ApiMethodFilter

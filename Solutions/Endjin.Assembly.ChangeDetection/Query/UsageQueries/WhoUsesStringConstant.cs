@@ -1,10 +1,9 @@
-namespace AssemblyDifferences.Query.usagequeries
+using System;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+
+namespace Endjin.Assembly.ChangeDetection.Query.UsageQueries
 {
-    using System;
-
-    using Mono.Cecil;
-    using Mono.Cecil.Cil;
-
     /// <summary>
     ///     Search for the ldstr opcode which loads a string constant and check if the string constant matches
     ///     the search string.

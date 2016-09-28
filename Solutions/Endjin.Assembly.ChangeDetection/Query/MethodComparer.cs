@@ -1,11 +1,9 @@
-namespace AssemblyDifferences.Query
+using System.Collections.Generic;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Query
 {
-    using System.Collections.Generic;
-
-    using AssemblyDifferences.Introspection;
-
-    using Mono.Cecil;
-
     internal class MethodComparer : IEqualityComparer<MethodDefinition>
     {
         #region IEqualityComparer<MethodDefinition> Members

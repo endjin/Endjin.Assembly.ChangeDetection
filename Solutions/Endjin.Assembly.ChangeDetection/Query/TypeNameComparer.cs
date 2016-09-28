@@ -1,9 +1,8 @@
-namespace AssemblyDifferences.Query
+using System.Collections.Generic;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Query
 {
-    using System.Collections.Generic;
-
-    using Mono.Cecil;
-
     internal class TypeNameComparer : IEqualityComparer<TypeDefinition>
     {
         #region IEqualityComparer<TypeDefinition> Members

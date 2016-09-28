@@ -1,8 +1,8 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     /// <summary>
     ///     Aggregate one or a list of queues for processing with WorkItemDispatcher. The queues
     ///     are processed in the order of addition. Only when the first queue is empty the next

@@ -1,7 +1,7 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System;
+﻿using System;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     /// <summary>
     ///     Severity of trace messages
     /// </summary>

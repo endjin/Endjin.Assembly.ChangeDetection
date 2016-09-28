@@ -1,14 +1,12 @@
-namespace AssemblyDifferences.Query.usagequeries
+using System;
+using System.Collections.Generic;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+using Mono.Collections.Generic;
+
+namespace Endjin.Assembly.ChangeDetection.Query.UsageQueries
 {
-    using System;
-    using System.Collections.Generic;
-
-    using AssemblyDifferences.Introspection;
-
-    using Mono.Cecil;
-    using Mono.Cecil.Cil;
-    using Mono.Collections.Generic;
-
     public class UsageVisitor
     {
         public UsageVisitor(UsageQueryAggregator aggregator)

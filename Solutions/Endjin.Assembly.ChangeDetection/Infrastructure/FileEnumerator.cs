@@ -1,12 +1,12 @@
-namespace AssemblyDifferences.Infrastructure
-{
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Security;
-    using System.Security.Permissions;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     /// <summary>
     ///     Provides the implementation of the
     ///     <see cref="T:System.Collections.Generic.IEnumerator`1" /> interface

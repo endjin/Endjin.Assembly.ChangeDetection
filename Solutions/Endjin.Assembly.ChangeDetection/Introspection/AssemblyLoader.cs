@@ -1,12 +1,10 @@
-namespace AssemblyDifferences.Introspection
+using System;
+using System.IO;
+using Endjin.Assembly.ChangeDetection.Infrastructure;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Introspection
 {
-    using System;
-    using System.IO;
-
-    using AssemblyDifferences.Infrastructure;
-
-    using Mono.Cecil;
-
     public class AssemblyLoader
     {
         private static readonly TypeHashes myType = new TypeHashes(typeof(AssemblyLoader));

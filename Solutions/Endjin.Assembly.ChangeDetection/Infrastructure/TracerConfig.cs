@@ -1,9 +1,9 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Diagnostics;
-    using System.Runtime.InteropServices;
+﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     /// <summary>
     ///     Main Class to configure trace output devices. The default instance is basically a null device.
     /// </summary>

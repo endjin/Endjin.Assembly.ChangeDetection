@@ -1,14 +1,10 @@
-﻿namespace Endjin.Assembly.ChangeDetection.Specs.Steps
+﻿using Endjin.Assembly.ChangeDetection.SemVer;
+
+namespace Endjin.Assembly.ChangeDetection.Specs.Steps
 {
     #region Using Directives
 
     using System.Collections.Generic;
-
-    using AssemblyDifferences;
-    using AssemblyDifferences.Infrastructure;
-    using AssemblyDifferences.Rules;
-    using AssemblyDifferences.SemVer;
-
     using Should;
 
     using TechTalk.SpecFlow;

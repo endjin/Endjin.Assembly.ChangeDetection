@@ -1,10 +1,10 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Reflection;
-    using System.Runtime.InteropServices;
-    using System.Threading;
+﻿using System;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     internal class LastException
     {
         private static FieldInfo myThreadPointerFieldInfo;

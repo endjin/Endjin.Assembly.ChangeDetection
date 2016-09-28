@@ -1,11 +1,11 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Threading;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     public class DirectorySearcherAsync : IEnumerable<string>
     {
         private static readonly TypeHashes myType = new TypeHashes(typeof(DirectorySearcherAsync));

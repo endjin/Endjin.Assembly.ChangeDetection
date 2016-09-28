@@ -1,11 +1,11 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     internal class TraceCfgParser
     {
         private static readonly Dictionary<string, MessageTypes> myFlagTranslator = new Dictionary<string, MessageTypes>(StringComparer.OrdinalIgnoreCase)

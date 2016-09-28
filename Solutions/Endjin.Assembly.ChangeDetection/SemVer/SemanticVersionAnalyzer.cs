@@ -1,13 +1,13 @@
-﻿namespace AssemblyDifferences.SemVer
+﻿using System.Collections.Generic;
+using Endjin.Assembly.ChangeDetection.Infrastructure;
+using Endjin.Assembly.ChangeDetection.Rules;
+using Semver;
+
+namespace Endjin.Assembly.ChangeDetection.SemVer
 {
     #region Using Directives
 
-    using System.Collections.Generic;
-
-    using AssemblyDifferences.Infrastructure;
-    using AssemblyDifferences.Rules;
-
-    using Semver;
+    
 
     #endregion
 

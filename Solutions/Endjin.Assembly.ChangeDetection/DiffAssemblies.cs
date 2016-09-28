@@ -1,14 +1,13 @@
-namespace AssemblyDifferences
+using System;
+using System.Collections.Generic;
+using System.IO;
+using Endjin.Assembly.ChangeDetection.Diff;
+using Endjin.Assembly.ChangeDetection.Infrastructure;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Endjin.Assembly.ChangeDetection.Query;
+
+namespace Endjin.Assembly.ChangeDetection
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-
-    using AssemblyDifferences.Diff;
-    using AssemblyDifferences.Infrastructure;
-    using AssemblyDifferences.Introspection;
-    using AssemblyDifferences.Query;
-
     public class DiffAssemblies
     {
         private static readonly TypeHashes MyType = new TypeHashes(typeof(DiffAssemblies));

@@ -1,10 +1,10 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     /// <summary>
     ///     A blocking queue which supports end markers to signal that no more work is left by inserting
     ///     a null reference. This constrains the queue to reference types only.

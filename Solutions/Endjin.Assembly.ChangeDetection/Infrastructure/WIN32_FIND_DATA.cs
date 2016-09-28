@@ -1,9 +1,9 @@
-namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.IO;
-    using System.Runtime.InteropServices;
+using System;
+using System.IO;
+using System.Runtime.InteropServices;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     /// <summary>
     ///     Contains information about the file that is found
     ///     by the FindFirstFile or FindNextFile functions.

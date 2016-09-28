@@ -1,11 +1,10 @@
-﻿namespace Endjin.SemanticVersioning.TeamCity
+﻿using Endjin.Assembly.ChangeDetection.SemVer;
+
+namespace Endjin.SemanticVersioning.TeamCity
 {
     #region Using Directives
 
     using System;
-
-    using AssemblyDifferences.SemVer;
-
     using ILMerging;
 
     #endregion

@@ -1,10 +1,9 @@
-namespace AssemblyDifferences.Query
+using System;
+using System.Collections.Generic;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Query
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Mono.Cecil;
-
     /// <summary>
     ///     Query object to search inside an assembly for specific types.
     /// </summary>

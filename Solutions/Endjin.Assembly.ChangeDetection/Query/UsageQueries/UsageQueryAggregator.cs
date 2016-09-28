@@ -1,15 +1,13 @@
-namespace AssemblyDifferences.Query.usagequeries
+using System;
+using System.Collections.Generic;
+using System.IO;
+using Endjin.Assembly.ChangeDetection.Infrastructure;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+
+namespace Endjin.Assembly.ChangeDetection.Query.UsageQueries
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-
-    using AssemblyDifferences.Infrastructure;
-    using AssemblyDifferences.Introspection;
-
-    using Mono.Cecil;
-    using Mono.Cecil.Cil;
-
     public class UsageQueryAggregator : IDisposable
     {
         private static readonly TypeHashes myType = new TypeHashes(typeof(UsageQueryAggregator));

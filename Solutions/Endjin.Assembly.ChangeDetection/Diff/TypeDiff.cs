@@ -1,12 +1,10 @@
-namespace AssemblyDifferences.Diff
+using System;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Endjin.Assembly.ChangeDetection.Query;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Diff
 {
-    using System;
-
-    using AssemblyDifferences.Introspection;
-    using AssemblyDifferences.Query;
-
-    using Mono.Cecil;
-
     public class TypeDiff
     {
         private static readonly TypeDefinition noType = new TypeDefinition("noType", null, TypeAttributes.Class, null);

@@ -1,14 +1,14 @@
-namespace AssemblyDifferences.Diff
+using System;
+using System.Collections.Generic;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Endjin.Assembly.ChangeDetection.Query;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Diff
 {
     #region Using Directives
 
-    using System;
-    using System.Collections.Generic;
-
-    using AssemblyDifferences.Introspection;
-    using AssemblyDifferences.Query;
-
-    using Mono.Cecil;
+    
 
     #endregion
 

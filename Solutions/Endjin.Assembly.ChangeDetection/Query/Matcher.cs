@@ -1,9 +1,9 @@
-namespace AssemblyDifferences.Query
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Text.RegularExpressions;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
+namespace Endjin.Assembly.ChangeDetection.Query
+{
     /// <summary>
     ///     Partial String matcher class which supports wildcards
     /// </summary>

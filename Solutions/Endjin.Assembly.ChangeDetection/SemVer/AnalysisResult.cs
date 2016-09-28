@@ -1,4 +1,4 @@
-﻿namespace AssemblyDifferences.SemVer
+﻿namespace Endjin.Assembly.ChangeDetection.SemVer
 {
     public class AnalysisResult
     {

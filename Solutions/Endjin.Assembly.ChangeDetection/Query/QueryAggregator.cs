@@ -1,10 +1,9 @@
-namespace AssemblyDifferences.Query
+using System.Collections.Generic;
+using System.Linq;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Query
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using Mono.Cecil;
-
     public class QueryAggregator
     {
         public List<EventQuery> EventQueries = new List<EventQuery>();

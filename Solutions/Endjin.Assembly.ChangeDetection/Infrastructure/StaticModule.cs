@@ -1,10 +1,10 @@
-namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Security.Permissions;
+using System;
+using System.Reflection;
+using System.Reflection.Emit;
+using System.Security.Permissions;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     internal class StaticModule
     {
         private const string ModuleAssemblyName = "AloisDynamicCaster";

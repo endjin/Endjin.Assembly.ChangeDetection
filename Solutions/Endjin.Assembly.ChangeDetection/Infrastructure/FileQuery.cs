@@ -1,10 +1,10 @@
-namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     public class FileQuery
     {
         private readonly SearchOption mySearchOption;

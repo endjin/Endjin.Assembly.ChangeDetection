@@ -1,14 +1,12 @@
-namespace AssemblyDifferences.Query.usagequeries
+using System;
+using System.Collections.Generic;
+using Endjin.Assembly.ChangeDetection.Infrastructure;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+
+namespace Endjin.Assembly.ChangeDetection.Query.UsageQueries
 {
-    using System;
-    using System.Collections.Generic;
-
-    using AssemblyDifferences.Infrastructure;
-    using AssemblyDifferences.Introspection;
-
-    using Mono.Cecil;
-    using Mono.Cecil.Cil;
-
     public class WhoUsesMethod : UsageVisitor
     {
         private const MethodPrintOption myMethodFormat = MethodPrintOption.ReturnType | MethodPrintOption.ShortNames | MethodPrintOption.Parameters;

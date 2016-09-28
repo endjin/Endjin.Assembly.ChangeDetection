@@ -1,8 +1,8 @@
-namespace AssemblyDifferences.Query
-{
-    using System;
-    using System.Text.RegularExpressions;
+using System;
+using System.Text.RegularExpressions;
 
+namespace Endjin.Assembly.ChangeDetection.Query
+{
     public class BaseQuery
     {
         // Common Regular expression part shared by the different queries

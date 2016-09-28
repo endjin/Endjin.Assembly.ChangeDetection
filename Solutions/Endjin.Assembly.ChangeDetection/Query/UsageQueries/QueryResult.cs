@@ -1,9 +1,8 @@
-namespace AssemblyDifferences.Query.usagequeries
+using System;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Query.UsageQueries
 {
-    using System;
-
-    using Mono.Cecil;
-
     public class QueryResult<T> where T : MemberReference
     {
         private MatchContext myAnnotations;

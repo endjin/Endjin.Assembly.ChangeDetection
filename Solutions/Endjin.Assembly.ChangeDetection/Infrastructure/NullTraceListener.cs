@@ -1,7 +1,7 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System.Diagnostics;
+﻿using System.Diagnostics;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     internal class NullTraceListener : TraceListener
     {
         public override void Write(string message)

@@ -1,8 +1,8 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     internal class TraceFilter
     {
         private const int MATCHANY = -1; // Hash value that marks a *

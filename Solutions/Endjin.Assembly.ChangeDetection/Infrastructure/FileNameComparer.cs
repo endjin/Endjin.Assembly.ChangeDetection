@@ -1,9 +1,9 @@
-namespace AssemblyDifferences.Infrastructure
-{
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     internal class FileNameComparer : IEqualityComparer<string>
     {
         #region IEqualityComparer<string> Members

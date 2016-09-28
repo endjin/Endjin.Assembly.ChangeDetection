@@ -1,15 +1,13 @@
-namespace AssemblyDifferences.Introspection
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using Endjin.Assembly.ChangeDetection.Diff;
+using Mono.Cecil;
+using Mono.Collections.Generic;
+
+namespace Endjin.Assembly.ChangeDetection.Introspection
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Text;
-
-    using AssemblyDifferences.Diff;
-
-    using Mono.Cecil;
-    using Mono.Collections.Generic;
-
     public static class TypeExtensions
     {
         public static TypeDiff GetTypeByName(this HashSet<TypeDiff> set, string typeName)

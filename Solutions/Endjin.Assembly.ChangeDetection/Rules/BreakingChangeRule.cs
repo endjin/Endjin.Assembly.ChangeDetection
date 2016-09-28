@@ -1,10 +1,11 @@
-﻿namespace AssemblyDifferences.Rules
+﻿using System.Linq;
+using Endjin.Assembly.ChangeDetection.Diff;
+
+namespace Endjin.Assembly.ChangeDetection.Rules
 {
     #region Using Directives
 
-    using System.Linq;
-
-    using AssemblyDifferences.Diff;
+    
 
     #endregion
 

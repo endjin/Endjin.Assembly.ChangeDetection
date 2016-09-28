@@ -1,11 +1,10 @@
-namespace AssemblyDifferences.Introspection
+using System;
+using System.Collections.Generic;
+using System.IO;
+using Endjin.Assembly.ChangeDetection.Infrastructure;
+
+namespace Endjin.Assembly.ChangeDetection.Introspection
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-
-    using AssemblyDifferences.Infrastructure;
-
     internal class PdbDownLoader
     {
         private static readonly TypeHashes myType = new TypeHashes(typeof(PdbDownLoader));

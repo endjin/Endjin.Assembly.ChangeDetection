@@ -1,10 +1,9 @@
-namespace AssemblyDifferences.Query.usagequeries
+using System;
+using System.IO;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Query.UsageQueries
 {
-    using System;
-    using System.IO;
-
-    using Mono.Cecil;
-
     public class WhoReferencesAssembly : UsageVisitor
     {
         private readonly string myAssembly;

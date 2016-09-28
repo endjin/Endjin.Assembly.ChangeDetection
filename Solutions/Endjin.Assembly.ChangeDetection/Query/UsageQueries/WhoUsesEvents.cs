@@ -1,13 +1,11 @@
-namespace AssemblyDifferences.Query.usagequeries
+using System;
+using System.Collections.Generic;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+
+namespace Endjin.Assembly.ChangeDetection.Query.UsageQueries
 {
-    using System;
-    using System.Collections.Generic;
-
-    using AssemblyDifferences.Introspection;
-
-    using Mono.Cecil;
-    using Mono.Cecil.Cil;
-
     public class WhoUsesEvents : UsageVisitor
     {
         public const string DefiningAssemblyKey = "Assembly";

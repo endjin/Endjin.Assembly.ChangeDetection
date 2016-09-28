@@ -1,7 +1,7 @@
-namespace AssemblyDifferences.Query.usagequeries
-{
-    using System.Collections.Generic;
+using System.Collections.Generic;
 
+namespace Endjin.Assembly.ChangeDetection.Query.UsageQueries
+{
     public class MatchContext : Dictionary<string, object>
     {
         public const string MatchReason = "Match Reason";

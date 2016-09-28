@@ -1,8 +1,8 @@
-namespace AssemblyDifferences
-{
-    using System;
-    using System.Collections;
+using System;
+using System.Collections;
 
+namespace Endjin.Assembly.ChangeDetection
+{
     /// <summary>
     ///     Compares two lists and creates two diff lists with added and removed elements
     /// </summary>

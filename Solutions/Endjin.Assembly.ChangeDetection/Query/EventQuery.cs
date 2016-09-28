@@ -1,11 +1,10 @@
-namespace AssemblyDifferences.Query
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using Mono.Cecil;
+
+namespace Endjin.Assembly.ChangeDetection.Query
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel;
-
-    using Mono.Cecil;
-
     public class EventQuery : MethodQuery
     {
         private static readonly EventQuery myPublicEvents = new EventQuery("public * *");

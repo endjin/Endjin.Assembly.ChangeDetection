@@ -1,13 +1,11 @@
-namespace AssemblyDifferences.Query.usagequeries
+using System;
+using System.Linq;
+using Endjin.Assembly.ChangeDetection.Introspection;
+using Mono.Cecil;
+using Mono.Cecil.Cil;
+
+namespace Endjin.Assembly.ChangeDetection.Query.UsageQueries
 {
-    using System;
-    using System.Linq;
-
-    using AssemblyDifferences.Introspection;
-
-    using Mono.Cecil;
-    using Mono.Cecil.Cil;
-
     public class WhoInstantiatesType : UsageVisitor
     {
         private const string ConstructorCalledContext = "Constructor called";

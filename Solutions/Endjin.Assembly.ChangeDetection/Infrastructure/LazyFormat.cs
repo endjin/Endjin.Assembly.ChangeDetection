@@ -1,7 +1,7 @@
-﻿namespace AssemblyDifferences.Infrastructure
-{
-    using System;
+﻿using System;
 
+namespace Endjin.Assembly.ChangeDetection.Infrastructure
+{
     /// <summary>
     ///     Support lazy formatting of strings. This is useful to delay the cration of
     ///     trace messages until the trace is enabled.

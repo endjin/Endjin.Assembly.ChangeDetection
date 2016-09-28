@@ -1,4 +1,4 @@
-namespace AssemblyDifferences.Diff
+namespace Endjin.Assembly.ChangeDetection.Diff
 {
     public class DiffResult<T>
     {

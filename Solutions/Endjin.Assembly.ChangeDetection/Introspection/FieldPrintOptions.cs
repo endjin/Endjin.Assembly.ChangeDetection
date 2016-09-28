@@ -1,7 +1,7 @@
-namespace AssemblyDifferences.Introspection
-{
-    using System;
+using System;
 
+namespace Endjin.Assembly.ChangeDetection.Introspection
+{
     [Flags]
     public enum FieldPrintOptions
     {
