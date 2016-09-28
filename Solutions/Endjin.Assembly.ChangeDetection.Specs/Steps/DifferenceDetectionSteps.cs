@@ -29,6 +29,31 @@ namespace Endjin.Assembly.ChangeDetection.Specs.Steps
             ScenarioContext.Current.Set(newAssembly.ResolveBaseDirectory(), "NewAssembly");
         }
 
+        [Given(@"the previous assemblies are ""(.*)""")]
+        public void GivenThePreviousAssembliesAre(string query)
+        {
+            ScenarioContext.Current.Set(query, "PreviousAssembliesQuery");
+        }
+
+        [Given(@"the new assemblies are ""(.*)""")]
+        public void GivenTheNewAssembliesAre(string query)
+        {
+            ScenarioContext.Current.Set(query, "NewAssembliesQuery");
+        }
+
+        [When(@"I compare the two sets of assemblies")]
+        public void WhenICompareTheTwoSetsOfAssemblies()
+        {
+            var differ = new DiffAssemblies();
+
+            var previousAssemblies = FileQuery.ParseQueryList(ScenarioContext.Current.Get<string>("PreviousAssembliesQuery"));
+            var newAssemblies = FileQuery.ParseQueryList(ScenarioContext.Current.Get<string>("NewAssembliesQuery"));
+
+            var differences = differ.Execute(previousAssemblies, newAssemblies);
+
+            ScenarioContext.Current.Set(differences, "Results");
+        }
+
         [When(@"I compare the two assemblies")]
         public void WhenICompareTheTwoAssemblies()
         {
@@ -52,6 +77,7 @@ namespace Endjin.Assembly.ChangeDetection.Specs.Steps
         }
 
         [Then(@"I should be told that the change is (.*) method has been added")]
+        [Then(@"I should be told that the change is (.*) methods have been added")]
         public void ThenIShouldBeToldThatTheChangeIsMethodHasBeenAdded(int numberAdded)
         {
             var results = ScenarioContext.Current.Get<AssemblyDiffCollection>("Results");
@@ -59,10 +85,28 @@ namespace Endjin.Assembly.ChangeDetection.Specs.Steps
         }
 
         [Then(@"I should be told that the change is (.*) method has been removed")]
+        [Then(@"I should be told that the change is (.*) methods have been removed")]
         public void ThenIShouldBeToldThatTheChangeIsMethodHasBeenRemoved(int numberRemoved)
         {
             var results = ScenarioContext.Current.Get<AssemblyDiffCollection>("Results");
             results.ChangedTypes.First().Methods.RemovedCount.ShouldEqual(numberRemoved);
         }
+
+        [Then(@"I should be told that the changes include (.*) method has been added")]
+        [Then(@"I should be told that the changes include (.*) methods have been added")]
+        public void ThenIShouldBeToldThatTheChangesIncludeMethodsHaveBeenAdded(int numberAdded)
+        {
+            var results = ScenarioContext.Current.Get<AssemblyDiffCollection>("Results");
+            results.ChangedTypes.Sum(diff => diff.Methods.AddedCount).ShouldEqual(numberAdded);
+        }
+
+        [Then(@"I should be told that the changes include (.*) method has been removed")]
+        [Then(@"I should be told that the changes include (.*) methods have been removed")]
+        public void ThenIShouldBeToldThatTheChangeIncludeMethodHasBeenRemoved(int numberRemoved)
+        {
+            var results = ScenarioContext.Current.Get<AssemblyDiffCollection>("Results");
+            results.ChangedTypes.Sum(diff => diff.Methods.RemovedCount).ShouldEqual(numberRemoved);
+        }
+
     }
 }

@@ -59,7 +59,7 @@ namespace Endjin.Assembly.ChangeDetection
                 oldFilesQuery.IntersectWith(newFilesQuery);
                 //DiffPrinter printer = new DiffPrinter(Out);
 
-                var differences = new AssemblyDiffCollection();
+                var result = new AssemblyDiffCollection();
 
                 foreach (var fileName1 in oldFilesQuery)
                 {
@@ -77,8 +77,10 @@ namespace Endjin.Assembly.ChangeDetection
                     if (assemblyV1 != null && assemblyV2 != null)
                     {
                         var differ = new AssemblyDiffer(assemblyV1, assemblyV2);
-                        differences = differ.GenerateTypeDiff(QueryAggregator.PublicApiQueries);
-                        
+                        var differences = differ.GenerateTypeDiff(QueryAggregator.PublicApiQueries);
+                        result.AddedRemovedTypes.AddRange(differences.AddedRemovedTypes);
+                        result.ChangedTypes.AddRange(differences.ChangedTypes);
+
                         //removedTypes += differences.AddedRemovedTypes.RemovedCount;
                         //changedTypes += differences.ChangedTypes.Count;
 
@@ -93,7 +95,7 @@ namespace Endjin.Assembly.ChangeDetection
                     }
                 }
 
-                return differences;
+                return result;
             }
         }
     }

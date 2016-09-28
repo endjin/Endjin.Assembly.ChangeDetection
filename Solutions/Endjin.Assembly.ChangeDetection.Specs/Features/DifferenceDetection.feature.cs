@@ -111,6 +111,58 @@ testRunner.And("I should be told that the change is 1 method has been removed", 
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Two new assemblies have non breaking additive changes")]
+        public virtual void TwoNewAssembliesHaveNonBreakingAdditiveChanges()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Two new assemblies have non breaking additive changes", ((string[])(null)));
+#line 22
+this.ScenarioSetup(scenarioInfo);
+#line 23
+testRunner.Given("the previous assemblies are \"TestData\\Original\\Original.dll;TestData\\Original2\\Or" +
+                    "iginal2.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 24
+testRunner.Given("the new assemblies are \"TestData\\NonBreakingAdditiveChange\\Original.dll;TestData\\" +
+                    "NonBreakingAdditiveChange2\\Original2.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 25
+testRunner.When("I compare the two sets of assemblies", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 26
+testRunner.Then("I should be told there are 2 changes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 27
+testRunner.And("I should be told that the changes include 2 methods have been added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 28
+testRunner.And("I should be told that the changes include 0 methods have been removed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Two new assemblies both have a breaking change due to a public api being modified" +
+            "")]
+        public virtual void TwoNewAssembliesBothHaveABreakingChangeDueToAPublicApiBeingModified()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Two new assemblies both have a breaking change due to a public api being modified" +
+                    "", ((string[])(null)));
+#line 30
+this.ScenarioSetup(scenarioInfo);
+#line 31
+testRunner.Given("the previous assemblies are \"TestData\\Original\\Original.dll;TestData\\Original2\\Or" +
+                    "iginal2.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 32
+testRunner.Given("the new assemblies are \"TestData\\BreakingChange\\Original.dll;TestData\\BreakingCha" +
+                    "nge2\\Original2.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 33
+testRunner.When("I compare the two sets of assemblies", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 34
+testRunner.Then("I should be told there are 2 changes", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 35
+testRunner.And("I should be told that the changes include 2 methods have been added", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 36
+testRunner.And("I should be told that the changes include 2 methods have been removed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
