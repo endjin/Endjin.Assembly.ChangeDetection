@@ -110,17 +110,16 @@
       <Name>Endjin.Assembly.ChangeDetection</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Content Include="..\BreakingChange\bin\Debug\Original.dll">
+    <Content Include="..\BreakingChange\bin\Release\Original.dll">
       <Link>TestData\BreakingChange\Original.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\NonBreakingAdditiveChange\bin\Debug\Original.dll">
+    <Content Include="..\NonBreakingAdditiveChange\bin\Release\Original.dll">
       <Link>TestData\NonBreakingAdditiveChange\Original.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\Original\bin\Debug\Original.dll">
+    <Content Include="..\Original\bin\Release\Original.dll">
       <Link>TestData\Original\Original.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
