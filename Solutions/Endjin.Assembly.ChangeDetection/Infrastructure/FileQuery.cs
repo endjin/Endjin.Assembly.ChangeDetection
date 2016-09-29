@@ -171,7 +171,7 @@ namespace Endjin.Assembly.ChangeDetection.Infrastructure
 
         public static List<FileQuery> ParseQueryList(string query)
         {
-            return ParseQueryList(query, null);
+            return ParseQueryList(query, null, SearchOption.TopDirectoryOnly);
         }
 
         private static string GetFileNameWithOutDllExtension(string file)
@@ -183,7 +183,7 @@ namespace Endjin.Assembly.ChangeDetection.Infrastructure
             return file;
         }
 
-        public static List<FileQuery> ParseQueryList(string query, string rootDir)
+        public static List<FileQuery> ParseQueryList(string query, string rootDir, SearchOption searchOption)
         {
             var ret = new List<FileQuery>();
 
@@ -196,7 +196,7 @@ namespace Endjin.Assembly.ChangeDetection.Infrastructure
                     querystr = Path.Combine(rootDir, q);
                 }
 
-                ret.Add(new FileQuery(querystr));
+                ret.Add(new FileQuery(querystr, searchOption));
             }
 
             return ret;

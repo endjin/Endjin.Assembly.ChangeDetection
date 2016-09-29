@@ -20,8 +20,8 @@ And I should be told that the change is 1 method has been added
 And I should be told that the change is 1 method has been removed
 
 Scenario: Two new assemblies have non breaking additive changes
-Given the previous assemblies are "TestData\Original\Original.dll;TestData\Original2\Original2.dll"
-Given the new assemblies are "TestData\NonBreakingAdditiveChange\Original.dll;TestData\NonBreakingAdditiveChange2\Original2.dll"
+Given the previous assemblies are "TestData\Original\*.dll;TestData\Original2\*.dll"
+Given the new assemblies are "TestData\NonBreakingAdditiveChange\*.dll;TestData\NonBreakingAdditiveChange2\*.dll"
 When I compare the two sets of assemblies
 Then I should be told there are 2 changes
 And I should be told that the changes include 2 methods have been added

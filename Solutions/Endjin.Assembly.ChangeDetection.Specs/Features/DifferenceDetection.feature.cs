@@ -120,11 +120,10 @@ testRunner.And("I should be told that the change is 1 method has been removed", 
 #line 22
 this.ScenarioSetup(scenarioInfo);
 #line 23
-testRunner.Given("the previous assemblies are \"TestData\\Original\\Original.dll;TestData\\Original2\\Or" +
-                    "iginal2.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("the previous assemblies are \"TestData\\Original\\*.dll;TestData\\Original2\\*.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 24
-testRunner.Given("the new assemblies are \"TestData\\NonBreakingAdditiveChange\\Original.dll;TestData\\" +
-                    "NonBreakingAdditiveChange2\\Original2.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+testRunner.Given("the new assemblies are \"TestData\\NonBreakingAdditiveChange\\*.dll;TestData\\NonBrea" +
+                    "kingAdditiveChange2\\*.dll\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 25
 testRunner.When("I compare the two sets of assemblies", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 26
